@@ -79,10 +79,10 @@ function App() {
         <Route path="uploadproduct" element ={user ? <UploadProduct />: <Navigate to={'/signin'} />} />
         <Route path=":id" element={<ProductTemp />} />
       </Route>
-      <Route path="/commerce" element={<Root/>}>
+      <Route path="/medical" element={<Root/>}>
         <Route index element={<Home />} />
-        <Route path="signup" element={!user ? <Signup/>: <Navigate to={'/commerce'} />} />
-        <Route path='signin' element={!user ? <Signin />: <Navigate to ={'/commerce'}/>} />
+        <Route path="signup" element={!user ? <Signup/>: <Navigate to={'/medical'} />} />
+        <Route path='signin' element={!user ? <Signin />: <Navigate to ={'/medical'}/>} />
         <Route path="uploadproduct" element ={user ? <UploadProduct />: <Navigate to={'signin'} />} />
         <Route path=":id" element={<ProductTemp />} />
         <Route path={"cart"} element={<Cart/>} />

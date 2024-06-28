@@ -5,7 +5,7 @@ export const MyProductArray = ({data})=>{
     const {user} = AuthConsumer();
 
     return(
-        <Link to={`/commerce/${data.id}`} className="product">
+        <Link to={`/medical/${data.id}`} className="product">
             <div className="productImage">
              <img src={data.productImage} alt="image"/>
             </div>

@@ -75,7 +75,7 @@ export const UploadProduct = ()=>{
           setStock('');
 
           
-          window.location.href = '/commerce';
+          window.location.href = '/medical';
           setDisable(false)
         } catch (error) {
           console.log(error);

@@ -30,11 +30,11 @@ export const Navbar = ()=>{
 
     return(
     <nav>
-    <NavLink to="/commerce" onClick={()=> setActiveNav('#') } className={activeNav === '#' ? 'active' : ''}> <ion-icon className='nav-icons'  name="home-outline"></ion-icon></NavLink>
+    <NavLink to="/medical" onClick={()=> setActiveNav('#') } className={activeNav === '#' ? 'active' : ''}> <ion-icon className='nav-icons'  name="home-outline"></ion-icon></NavLink>
 
-    <NavLink to="/commerce/cart" onClick={()=> setActiveNav('#Experience') } className={activeNav === '#Experience' ? 'active' : ''}><ion-icon className='nav-icons' name="cart-outline"></ion-icon>{ count > 0 &&<span className='badge'>{count}</span>}</NavLink>
+    <NavLink to="/medical/cart" onClick={()=> setActiveNav('#Experience') } className={activeNav === '#Experience' ? 'active' : ''}><ion-icon className='nav-icons' name="cart-outline"></ion-icon>{ count > 0 &&<span className='badge'>{count}</span>}</NavLink>
     
-    <NavLink to="/commerce/search" onClick={()=> setActiveNav('#Portfolio') } className={activeNav === '#Portfolio' ? 'active' : ''}><ion-icon className='nav-icons' name="search-outline"></ion-icon></NavLink>
+    <NavLink to="/medical/search" onClick={()=> setActiveNav('#Portfolio') } className={activeNav === '#Portfolio' ? 'active' : ''}><ion-icon className='nav-icons' name="search-outline"></ion-icon></NavLink>
     
   </nav>
     )

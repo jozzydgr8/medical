@@ -37,7 +37,7 @@ export const Search = ()=>{
         <div className="searchFeature">
         <form onSubmit={handleFilter} className="d-flex" role="search">
         <div class="input-group">
-        <Link to='/commerce' className="input-group-text" id="basic-addon1"><ion-icon name="arrow-back-outline"></ion-icon></Link>   
+        <Link to='/medical' className="input-group-text" id="basic-addon1"><ion-icon name="arrow-back-outline"></ion-icon></Link>   
         <input ref={inputRef} style={{outline:'none'}} value={search} type="text" className="form-control shadow-none" placeholder="find product" aria-label="Username" aria-describedby="basic-addon1" onChange={(e)=>handleData(e)} onClick={()=>setActiveSearch(true)} />
         <button type="submit" className="input-group-text" id="basic-addon1"><ion-icon name="search-outline"></ion-icon></button> <ion-icon name="filter-outline"></ion-icon>
           
@@ -47,7 +47,7 @@ export const Search = ()=>{
        <main className="summary searchMap">
             {
                 result.map(search =>(
-                    <Link className="cartDiv searchLink" key={search.id} to={`/commerce/${search.id}`}>
+                    <Link className="cartDiv searchLink" key={search.id} to={`/medical/${search.id}`}>
                         <div className="cartDetail searchDiv" >
                             {search.product} <span className="searchLogo"><ion-icon name="cart-outline"></ion-icon></span>
                         </div>
@@ -61,7 +61,7 @@ export const Search = ()=>{
             {
                 !filter &&
                 result.map(result=>(
-                    <Link to={`/commerce/${result.id}`} className="product">
+                    <Link to={`/medical/${result.id}`} className="product">
                     <div className="productImage">
                      <img src={result.productImage} alt="image"/>
                     </div>

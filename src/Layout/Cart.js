@@ -53,7 +53,7 @@ export const Cart = () => {
 
 
     if (cart.length === 0) {
-        return <div>add products to cart to view carts <Link to={'/commerce'} className="btn btn-outline-secondary">shop</Link> </div>;
+        return <div>add products to cart to view carts <Link to={'/medical'} className="btn btn-outline-secondary">shop</Link> </div>;
     }
 
     // remove item

@@ -40,7 +40,7 @@ export const Signin = ()=>{
                 <input placeholder="create password" value={password} onChange={e=>setPassword(e.target.value)} />
                 <button onClick={handleSignIn} className="full-btn" disabled={disable}>submit</button>
                 {errorMessage && <p>{errorMessage}</p>}
-                <p><Link className="" to={'/commerce/signup'}> or signup?</Link></p>
+                <p><Link className="" to={'/medical/signup'}> or signup?</Link></p>
             </form>
             
             </div>

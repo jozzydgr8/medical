@@ -64,7 +64,7 @@ export const Signup = ()=>{
                     <input placeholder="create password" value={password} onChange={e=>setPassword(e.target.value)} />
                     <button onClick={handleSignUp} className="full-btn" disabled={disable}>submit</button>
                     {errorMessage && <p>{errorMessage}</p>}
-                    <p> if you already have an account  <Link to={'/commerce/signin'}>sign in</Link> </p>
+                    <p> if you already have an account  <Link to={'/medical/signin'}>sign in</Link> </p>
                 </form>
             
             </div>

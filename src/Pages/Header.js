@@ -18,7 +18,7 @@ export const Header = ()=>{
     return (
         <main>
             <div className="headerFlex">
-                <NavLink to='/commerce' className="ubuntu">Medical shop</NavLink>
+                <NavLink to='/medical' className="ubuntu">Medical shop</NavLink>
                 <div className=""> {user ? <ion-icon className='outline-btn' onClick={handleLogOut} name="log-out-outline"></ion-icon> : <NavLink to='signin' className=""><ion-icon name="person-outline"></ion-icon></NavLink> }</div>
             </div>
             

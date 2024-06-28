@@ -61,8 +61,8 @@ const handleDelete = async (imagePath, id) => {
         return console.error("Error deleting document:", error);
     }
     setDisable(false)
-    window.location.href ='/commerce'
-    // navigate('/commerce')
+    window.location.href ='/medical'
+    // navigate('/medical')
 };
     return(
         <>
