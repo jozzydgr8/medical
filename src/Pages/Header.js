@@ -16,13 +16,14 @@ export const Header = ()=>{
         })
     }
     return (
-        <main>
+        <section>
+            <div className="container-fluid">
             <div className="headerFlex">
                 <NavLink to='/medical' className="ubuntu">Medical shop</NavLink>
-                <div className=""> {user ? <ion-icon className='outline-btn' onClick={handleLogOut} name="log-out-outline"></ion-icon> : <NavLink to='signin' className=""><ion-icon name="person-outline"></ion-icon></NavLink> }</div>
+                <div className="headerIcon"> {user ? <ion-icon onClick={handleLogOut} name="log-out-outline"></ion-icon> : <NavLink to='signin'><ion-icon name="person-outline"></ion-icon></NavLink> }</div>
             </div>
             
-
-        </main>
+            </div>
+        </section>
     )
 }

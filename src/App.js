@@ -61,7 +61,9 @@ function App() {
           dispatch({type:'getData', payload:data});
         });
       });
+      dispatch({type:'loading', payload:false})
       return ()=> unSubscribe();
+      
     },[]);
 
   if(loading || load){

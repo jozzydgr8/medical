@@ -11,8 +11,8 @@ export const Home = ()=>{
       
         <Carousel />
         
-        <div className="container-fluid" >
-          {user && user.uid === process.env.REACT_APP_acceptedID?<Admin name={user.displayName}/>:<div style={{textAlign:'center'}}>shop with us</div>}
+        <div>
+          {user && user.uid === process.env.REACT_APP_acceptedID?<Admin name={user.displayName}/>:<div>shop with us{user && user.displayName}</div>}
            
             <main>
               <MyProduct/>

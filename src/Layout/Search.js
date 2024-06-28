@@ -34,56 +34,71 @@ export const Search = ()=>{
     }
     return(
         <>
-        <div className="searchFeature">
-        <form onSubmit={handleFilter} className="d-flex" role="search">
-        <div class="input-group">
-        <Link to='/medical' className="input-group-text" id="basic-addon1"><ion-icon name="arrow-back-outline"></ion-icon></Link>   
-        <input ref={inputRef} style={{outline:'none'}} value={search} type="text" className="form-control shadow-none" placeholder="find product" aria-label="Username" aria-describedby="basic-addon1" onChange={(e)=>handleData(e)} onClick={()=>setActiveSearch(true)} />
-        <button type="submit" className="input-group-text" id="basic-addon1"><ion-icon name="search-outline"></ion-icon></button> <ion-icon name="filter-outline"></ion-icon>
-          
-       </div>
         {
-        filter && 
-       <main className="summary searchMap">
-            {
-                result.map(search =>(
-                    <Link className="cartDiv searchLink" key={search.id} to={`/medical/${search.id}`}>
-                        <div className="cartDetail searchDiv" >
-                            {search.product} <span className="searchLogo"><ion-icon name="cart-outline"></ion-icon></span>
-                        </div>
-                    </Link>
-                ))
-            }
-        </main>
-         }
-        </form>
-        <div className="gridProduct">
-            {
-                !filter &&
-                result.map(result=>(
-                    <Link to={`/medical/${result.id}`} className="product">
-                    <div className="productImage">
-                     <img src={result.productImage} alt="image"/>
-                    </div>
-                     <div className="productDetail">
-                        <div>{result.product}</div>
-                        <div>price: {result.prize}</div>
-                        
-                        <div>
-                            <button className="full-btn">Add to cart</button>
-                        </div>
-        
-                        {user && user.uid === process.env.REACT_APP_acceptedID && <button className="outline-btn">delete</button>}
+            !activeSearch ? 
+            <div className="searchFeature">
+                    <form onSubmit={handleFilter} className="d-flex" role="search">
+                    <div class="input-group">
+                    <input style={{outline:'none'}} value={search} type="text" className="form-control shadow-none" placeholder="find product" aria-label="Username" aria-describedby="basic-addon1" onChange={(e)=>handleData(e)} onClick={()=>setActiveSearch(true)} />
+                    <button type="submit" className="input-group-text" id="basic-addon1"><ion-icon name="search-outline"></ion-icon></button>
                     
-                     </div>
-        
-                    </Link>
-                ))
+                    </div>
 
-            }
-            </div>
+                    </form>
+            </div>:
+                    <div className="searchFeature activeSearch">
+                    <form onSubmit={handleFilter} className="d-flex" role="search">
+                    <div class="input-group">
+                    <span onClick={()=>setActiveSearch(false)} className="input-group-text" id="basic-addon1"><ion-icon name="arrow-back-outline"></ion-icon></span>   
+                    <input style={{outline:'none'}} value={search} type="text" className="form-control shadow-none" placeholder="find product" aria-label="Username" aria-describedby="basic-addon1" onChange={(e)=>handleData(e)} />
+                    <button type="submit" className="input-group-text" id="basic-addon1"><ion-icon name="search-outline"></ion-icon></button>
+                      
+                   </div>
+                    {
+                    filter && 
+                   <main className="summary searchMap">
+                        {
+                            result.map(search =>(
+                                <Link className="cartDiv searchLink" key={search.id} to={`/medical/${search.id}`}>
+                                    <div className="cartDetail searchDiv" >
+                                        {search.product} <span className="searchLogo"><ion-icon name="cart-outline"></ion-icon></span>
+                                    </div>
+                                </Link>
+                            ))
+                        }
+                    </main>
+                     }
+                    </form>
+                    <div className="gridProduct">
+                        {
+                            !filter &&
+                            result.map(result=>(
+                                <Link to={`/medical/${result.id}`} className="product">
+                                <div className="productImage">
+                                 <img src={result.productImage} alt="productImage"/>
+                                </div>
+                                 <div className="productDetail">
+                                    <div>{result.product}</div>
+                                    <div>price: {result.prize}</div>
+                                    
+                                    <div>
+                                        <button className="full-btn">Add to cart</button>
+                                    </div>
+                    
+                                    {user && user.uid === process.env.REACT_APP_acceptedID && <button className="outline-btn">delete</button>}
+                                
+                                 </div>
+                    
+                                </Link>
+                            ))
+            
+                        }
+                        </div>
+            
+                    </div>
 
-        </div>
+        }
+
         </>
     )
 }

@@ -16,7 +16,9 @@ export const Cart = () => {
             if(!carts){
                 return
             }
-        
+            if(!data){
+                return
+            }
             const renderCart = data.filter(data => carts.includes(data.id));
             setCart(renderCart);
             console.log(renderCart);
@@ -53,7 +55,7 @@ export const Cart = () => {
 
 
     if (cart.length === 0) {
-        return <div>add products to cart to view carts <Link to={'/medical'} className="btn btn-outline-secondary">shop</Link> </div>;
+        return <section><div className="container-fluid">add products to cart to view carts <Link to={'/medical'} className="btn btn-outline-secondary">shop</Link> </div></section>;
     }
 
     // remove item
@@ -79,8 +81,8 @@ export const Cart = () => {
 
     
     return (
-        <>
-            <main className="summary">
+        <section>
+            <div className="summary container-fluid">
                 <span>cart summary</span>
                 
                     <div className="subtotal">
@@ -115,7 +117,7 @@ export const Cart = () => {
                 
                     <button style={{width:'100%'}} className="full-btn">checkout {`$ ${reduce}`}</button>
                 
-            </main>
-        </>
+            </div>
+        </section>
     );
 };

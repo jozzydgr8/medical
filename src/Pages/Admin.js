@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 export const Admin  = ({name})=>{
 
     return(
-        <>
-        <div className="container-fluid" style={{textAlign:'center'}} >
+        <section>
+        <div className="container-fluid" >
            <h3 className="ubuntu">welcome {name}</h3>
             <div className="homefeatures">
                 
@@ -13,6 +13,6 @@ export const Admin  = ({name})=>{
             </div>
             
         </div>
-        </>
+        </section>
     )
 }
