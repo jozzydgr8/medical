@@ -32,9 +32,9 @@ export const Navbar = ()=>{
     <nav>
     <NavLink to="/medical" onClick={()=> setActiveNav('#') } className={activeNav === '#' ? 'active' : ''}> <ion-icon className='nav-icons'  name="home-outline"></ion-icon></NavLink>
 
-    <NavLink to="/medical/cart" onClick={()=> setActiveNav('#Experience') } className={activeNav === '#Experience' ? 'active' : ''}><ion-icon className='nav-icons' name="cart-outline"></ion-icon>{ count > 0 &&<span className='badge'>{count}</span>}</NavLink>
+    <NavLink to="/medical/cart" onClick={()=> setActiveNav('#cart') } className={activeNav === '#cart' ? 'active' : ''}><ion-icon className='nav-icons' name="cart-outline"></ion-icon>{ count > 0 &&<span className='badge'>{count}</span>}</NavLink>
     
-    <NavLink to="/medical/search" onClick={()=> setActiveNav('#Portfolio') } className={activeNav === '#Portfolio' ? 'active' : ''}><ion-icon className='nav-icons' name="search-outline"></ion-icon></NavLink>
+    <a href="/medical#search" onClick={()=> setActiveNav('#search') } className={activeNav === '#search' ? 'active' : ''}><ion-icon className='nav-icons' name="search-outline"></ion-icon></a>
     
   </nav>
     )

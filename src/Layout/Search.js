@@ -39,7 +39,7 @@ export const Search = ()=>{
 
 
     return(
-        <>
+        <section id="search">
         {
             !activeSearch ? 
             <div className="searchFeature">
@@ -191,6 +191,6 @@ export const Search = ()=>{
 
         }
 
-        </>
+        </section>
     )
 }

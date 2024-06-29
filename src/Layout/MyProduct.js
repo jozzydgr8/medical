@@ -8,12 +8,18 @@ export const MyProduct = ()=>{
 
 
     return(
-          <div className="gridProduct">
+        <section>
+            <div className="container-fluid">
+            <div className="gridProduct">
             {
                 data && data.map((data)=>(
                     <MyProductArray key={data.id} data={data}/>
                 ))
             }
           </div>
+            </div>
+
+        </section>
+
     )
 }
