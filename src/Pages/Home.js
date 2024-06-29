@@ -12,7 +12,7 @@ export const Home = ()=>{
         <Carousel />
         
         <div>
-          {user && user.uid === process.env.REACT_APP_acceptedID?<Admin name={user.displayName}/>:<div>shop with us{user && user.displayName}</div>}
+          {user && user.uid === process.env.REACT_APP_acceptedID?<Admin name={user.displayName}/>:<section><div className='container-fluid'>shop with us{user && user.displayName}</div></section>}
            
             <main>
               <MyProduct/>

@@ -32,6 +32,8 @@ export const Search = ()=>{
         setSearch('');
 
     }
+
+
     return(
         <>
         {
@@ -45,6 +47,86 @@ export const Search = ()=>{
                     </div>
 
                     </form>
+
+                    <section>
+                        <div className="container-fluid">
+                            <main className="categoryMain" >
+                            <span className="ubuntu">categories</span>                          
+                            <div className='categoryFlex'>
+                                <div className="category">{data && data.filter(data => data.category.includes('clothing'))
+                                    .slice(0,1).map(data=>(
+                                    <div key={data.id}>
+                                        <div className="headerFlex categoryProduct ">
+                                            <div className="categoryProductImage">
+                                            <img src={data.productImage} alt="productCategoryImage" />
+                                            </div>
+                                            <div className="container"> accessories </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                ))}</div>
+{/* 
+                                //second div */}
+                            <div className="category">{data && data.filter(data => data.category.includes('clothing'))
+                                    .slice(0,1).map(data=>(
+                                    <div key={data.id}>
+                                        <div className="headerFlex categoryProduct ">
+                                            <div className="categoryProductImage">
+                                            <img src={data.productImage} alt="productCategoryImage" />
+                                            </div>
+
+
+                                            <div className="container"> accessories </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                ))}</div>
+                            </div>
+
+
+
+{/* 
+second category */}
+                            <div className='categoryFlex'>
+                                <div className="category">{data && data.filter(data => data.category.includes('clothing'))
+                                    .slice(0,1).map(data=>(
+                                    <div key={data.id}>
+                                        <div className="headerFlex categoryProduct ">
+                                            <div className="categoryProductImage">
+                                            <img src={data.productImage} alt="productCategoryImage" />
+                                            </div>
+                                            <div className="container"> accessories </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                ))}</div>
+{/* 
+                                //second div */}
+                            <div className="category">{data && data.filter(data => data.category.includes('clothing'))
+                                    .slice(0,1).map(data=>(
+                                    <div key={data.id}>
+                                        <div className="headerFlex categoryProduct ">
+                                            <div className="categoryProductImage">
+                                            <img src={data.productImage} alt="productCategoryImage" />
+                                            </div>
+
+
+                                            <div className="container"> accessories </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                ))}</div>
+                            </div>
+
+                            
+
+                            </main>
+                        </div>
+                    </section>
             </div>:
                     <div className="searchFeature activeSearch">
                     <form onSubmit={handleFilter} className="d-flex" role="search">
