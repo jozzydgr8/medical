@@ -10,7 +10,11 @@ export const Search = ()=>{
     const [filter, setFilter] = useState(true);
     const [activeSearch, setActiveSearch] = useState(false)
     const {user} = AuthConsumer();
-    const inputRef = useRef(null)
+    const inputRef = useRef(null);
+    const filterDiagnostic = data && data.filter(data => data.category.toLowerCase().includes('diagnostic'));
+    const filterRehab = data && data.filter(data => data.category.toLowerCase().includes('rehabilitation'));
+    const filterPPE = data && data.filter(data => data.category.toLowerCase().includes('ppe'));
+    const filterSurgical = data && data.filter(data => data.category.toLowerCase().includes('surgical'));
     useEffect(()=>{
         if (inputRef.current) {
             inputRef.current.focus();
@@ -49,83 +53,89 @@ export const Search = ()=>{
                     </form>
 
                     <section>
-                        <div className="container-fluid">
-                            <main className="categoryMain" >
-                            <span className="ubuntu">categories</span>                          
-                            <div className='categoryFlex'>
-                                <div className="category">{data && data.filter(data => data.category.includes('clothing'))
-                                    .slice(0,1).map(data=>(
-                                    <div key={data.id}>
-                                        <div className="headerFlex categoryProduct ">
-                                            <div className="categoryProductImage">
-                                            <img src={data.productImage} alt="productCategoryImage" />
-                                            </div>
-                                            <div className="container"> accessories </div>
-                                            
-                                            
-                                        </div>
-                                    </div>
-                                ))}</div>
-{/* 
-                                //second div */}
-                            <div className="category">{data && data.filter(data => data.category.includes('clothing'))
-                                    .slice(0,1).map(data=>(
-                                    <div key={data.id}>
-                                        <div className="headerFlex categoryProduct ">
-                                            <div className="categoryProductImage">
-                                            <img src={data.productImage} alt="productCategoryImage" />
-                                            </div>
-
-
-                                            <div className="container"> accessories </div>
-                                            
-                                            
-                                        </div>
-                                    </div>
-                                ))}</div>
-                            </div>
-
-
-
-{/* 
-second category */}
-                            <div className='categoryFlex'>
-                                <div className="category">{data && data.filter(data => data.category.includes('clothing'))
-                                    .slice(0,1).map(data=>(
-                                    <div key={data.id}>
-                                        <div className="headerFlex categoryProduct ">
-                                            <div className="categoryProductImage">
-                                            <img src={data.productImage} alt="productCategoryImage" />
-                                            </div>
-                                            <div className="container"> accessories </div>
-                                            
-                                            
-                                        </div>
-                                    </div>
-                                ))}</div>
-{/* 
-                                //second div */}
-                            <div className="category">{data && data.filter(data => data.category.includes('clothing'))
-                                    .slice(0,1).map(data=>(
-                                    <div key={data.id}>
-                                        <div className="headerFlex categoryProduct ">
-                                            <div className="categoryProductImage">
-                                            <img src={data.productImage} alt="productCategoryImage" />
-                                            </div>
-
-
-                                            <div className="container"> accessories </div>
-                                            
-                                            
-                                        </div>
-                                    </div>
-                                ))}</div>
-                            </div>
-
+                        
                             
-
-                            </main>
-                        </div>
+                             {
+                                filterDiagnostic != 0 && filterPPE != 0 && filterRehab != 0 && filterSurgical != 0 &&
+                                <div className="container-fluid">
+                                <main className="categoryMain" >   
+                                <span className="ubuntu">categories</span>                          
+                                <div className='categoryFlex'>
+                                    <div className="category">{filterDiagnostic && filterDiagnostic
+                                        .slice(0,1).map(data=>(
+                                        <div key={data.id}>
+                                            <div className="headerFlex categoryProduct ">
+                                                <div className="categoryProductImage">
+                                                <img src={data.productImage} alt="productCategoryImage" />
+                                                </div>
+                                                <div className="container">Diagnostics</div>
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                    ))}</div>
+    {/* 
+                                    //second div */}
+                                <div className="category">{filterRehab && filterRehab
+                                        .slice(0,1).map(data=>(
+                                        <div key={data.id}>
+                                            <div className="headerFlex categoryProduct ">
+                                                <div className="categoryProductImage">
+                                                <img src={data.productImage} alt="productCategoryImage" />
+                                                </div>
+    
+    
+                                                <div className="container">Rehabilitation</div>
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                    ))}</div>
+                                </div>
+    
+    
+    
+    {/* 
+    second category */}
+                                <div className='categoryFlex'>
+                                    <div className="category">{filterSurgical && filterSurgical
+                                        .slice(0,1).map(data=>(
+                                        <div key={data.id}>
+                                            <div className="headerFlex categoryProduct ">
+                                                <div className="categoryProductImage">
+                                                <img src={data.productImage} alt="productCategoryImage" />
+                                                </div>
+                                                <div className="container">Surgical</div>
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                    ))}</div>
+    {/* 
+                                    //second div */}
+                                <div className="category">{filterPPE && filterPPE
+                                        .slice(0,1).map(data=>(
+                                        <div key={data.id}>
+                                            <div className="headerFlex categoryProduct ">
+                                                <div className="categoryProductImage">
+                                                <img src={data.productImage} alt="productCategoryImage" />
+                                                </div>
+    
+    
+                                                <div className="container">PPE</div>
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                    ))}</div>
+                                </div>
+    
+                                
+    
+                                </main>
+                                </div>
+                             }
+                        
                     </section>
             </div>:
                     <div className="searchFeature activeSearch">

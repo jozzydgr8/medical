@@ -11,7 +11,7 @@ import { Load } from "./Load";
 export const UploadProduct = ()=>{
     const [productName, setProductName] = useState('');
     const [disable, setDisable] = useState(false)
-    const [category, setCategory] = useState('clothing');
+    const [category, setCategory] = useState('accessories');
     const [sizes, setSizes] = useState('')
     const [imageUpload, setImageUpload] = useState('');
     const [productOwner, setProductOwner] = useState('');
@@ -106,10 +106,13 @@ export const UploadProduct = ()=>{
               <label htmlFor='category'>category</label>
               <select name = 'category' value={category} onChange={e => setCategory(e.target.value)} required >
                   <option  disabled >select category</option>
-                  <option value={'clothing'}>clothing</option>
-                  <option value={'shoes'}>shoes</option>
-                  <option value={'bags'}>bags</option>
                   <option value={'accessories'}>accessories</option>
+                  <option value={'diagnostic'}>diagnostic</option>
+                  <option value={'therapeutic'}>therapeutic</option>
+                  <option value={'monitoring'}>monitoring</option>
+                  <option value={'surgical'}>surgical</option>
+                  <option value={'ppe'}>personal protective equipment</option>
+                  <option value={'rehabilitation'}>rehabilitation</option>
               </select>
               <input value={sizes} onChange={e=>setSizes(e.target.value)} placeholder="size" required />
               {/* <span>seperate each sizes with a delimiter like comma !</span> */}
