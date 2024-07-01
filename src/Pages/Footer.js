@@ -5,7 +5,7 @@ export const Footer = ()=>{
         <section id="footer">
             <div className="container-fluid">
 
-                <span className="montserrat">subscribe for news and updates</span>
+                <span className="montserrat">subscribe for news & updates</span>
                 
                 <div>
                     <input type="email" placeholder="enter email address"/>
