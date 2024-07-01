@@ -27,19 +27,24 @@ export const Search = ()=>{
         if (inputValue === ''){
             return
         } 
-        const searchArr = data.filter(data => data.product.toLowerCase().includes(inputValue));
+        const searchArr = data.filter(entry => {
+            const strData = JSON.stringify(entry).toLowerCase();
+            return strData.includes(inputValue);
+          });
+
+    
         setResult(searchArr)
     }
     const handleFilter = (e)=>{
         setFilter(false)
         e.preventDefault();
-        setSearch('');
 
     }
 
 
     return(
         <section id="search">
+        
         {
             !activeSearch ? 
             <div className="searchFeature">
@@ -64,14 +69,14 @@ export const Search = ()=>{
                                     <div className="category">{filterDiagnostic && filterDiagnostic
                                         .slice(0,1).map(data=>(
                                         <div key={data.id}>
-                                            <div className="headerFlex categoryProduct ">
+                                            <Link to={`/medical/${data.category}`} className="headerFlex categoryProduct ">
                                                 <div className="categoryProductImage">
                                                 <img src={data.productImage} alt="productCategoryImage" />
                                                 </div>
                                                 <div className="container">Diagnostics</div>
                                                 
                                                 
-                                            </div>
+                                            </Link>
                                         </div>
                                     ))}</div>
     {/* 
@@ -79,7 +84,7 @@ export const Search = ()=>{
                                 <div className="category">{filterRehab && filterRehab
                                         .slice(0,1).map(data=>(
                                         <div key={data.id}>
-                                            <div className="headerFlex categoryProduct ">
+                                            <Link to={`/medical/${data.category}`} className="headerFlex categoryProduct ">
                                                 <div className="categoryProductImage">
                                                 <img src={data.productImage} alt="productCategoryImage" />
                                                 </div>
@@ -88,7 +93,7 @@ export const Search = ()=>{
                                                 <div className="container">Rehabilitation</div>
                                                 
                                                 
-                                            </div>
+                                            </Link>
                                         </div>
                                     ))}</div>
                                 </div>
@@ -101,14 +106,14 @@ export const Search = ()=>{
                                     <div className="category">{filterSurgical && filterSurgical
                                         .slice(0,1).map(data=>(
                                         <div key={data.id}>
-                                            <div className="headerFlex categoryProduct ">
+                                            <Link to={`/medical/${data.category}`} className="headerFlex categoryProduct ">
                                                 <div className="categoryProductImage">
                                                 <img src={data.productImage} alt="productCategoryImage" />
                                                 </div>
                                                 <div className="container">Surgical</div>
                                                 
                                                 
-                                            </div>
+                                            </Link>
                                         </div>
                                     ))}</div>
     {/* 
@@ -116,7 +121,7 @@ export const Search = ()=>{
                                 <div className="category">{filterPPE && filterPPE
                                         .slice(0,1).map(data=>(
                                         <div key={data.id}>
-                                            <div className="headerFlex categoryProduct ">
+                                            <Link to={`/medical/${data.category}`} className="headerFlex categoryProduct ">
                                                 <div className="categoryProductImage">
                                                 <img src={data.productImage} alt="productCategoryImage" />
                                                 </div>
@@ -125,7 +130,7 @@ export const Search = ()=>{
                                                 <div className="container">PPE</div>
                                                 
                                                 
-                                            </div>
+                                            </Link>
                                         </div>
                                     ))}</div>
                                 </div>
@@ -161,6 +166,7 @@ export const Search = ()=>{
                     </main>
                      }
                     </form>
+                    <div className="container-fluid">
                     <div className="gridProduct">
                         {
                             !filter &&
@@ -186,6 +192,7 @@ export const Search = ()=>{
             
                         }
                         </div>
+                    </div>
             
                     </div>
 

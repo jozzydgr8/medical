@@ -12,7 +12,7 @@ export const MyProduct = ()=>{
             <div>
             <div className="gridProduct">
             {
-                data && data.map((data)=>(
+                data && data.slice(0,10).map((data)=>(
                     <MyProductArray key={data.id} data={data}/>
                 ))
             }

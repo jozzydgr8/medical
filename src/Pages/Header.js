@@ -20,7 +20,10 @@ export const Header = ()=>{
             <div className="container-fluid">
             <div className="headerFlex">
                 <NavLink to='/medical' className="ubuntu">Medical shop</NavLink>
-                <div className="headerIcon"> {user ? <ion-icon onClick={handleLogOut} name="log-out-outline"></ion-icon> : <NavLink to='signin'><ion-icon name="person-add-outline"></ion-icon></NavLink> }</div>
+                <div className="headerIcon"> {user ? <ion-icon onClick={handleLogOut} name="log-out-outline"></ion-icon> : <NavLink to='signin'>
+                    <ion-icon name="person-add-outline"></ion-icon> 
+                     <small style={{fontSize:'15px'}}> login</small>
+                     </NavLink> }</div>
             </div>
             
             </div>

@@ -3,8 +3,8 @@ export const Admin  = ({name})=>{
 
     return(
         <section>
-        <div className="container-fluid" >
-           <h3 className="ubuntu">welcome {name}</h3>
+        <div >
+           <span className="montserrat">welcome {name}</span>
             <div className="homefeatures">
                 
              <Link to='uploadproduct' className="full-btn">

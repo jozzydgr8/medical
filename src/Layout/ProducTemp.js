@@ -6,6 +6,7 @@ import { deleteObject, ref } from "firebase/storage"
 import { AuthConsumer } from "../Context/ContextAuth/AuthConsumer"
 import { UseContextData } from "../Context/ContextAuth/ContextProvider/UseContextData";
 import { Load } from "../Pages/Load";
+import { Header } from "../Pages/Header";
 
 export const ProductTemp = ()=>{
     const {id} = useParams();
@@ -17,7 +18,10 @@ export const ProductTemp = ()=>{
     const [disable, setDisable] = useState(false)
     const navigate = useNavigate();
     useEffect(()=>{
-            const template = data && data.filter(data => id.includes(data.id));
+        const template = data && data.filter(item => {
+            // Check if any key in `item` matches `id` exactly
+            return Object.values(item).includes(id);
+          });
             setTempData(template)
     
     },[data]);
@@ -68,6 +72,8 @@ const handleDelete = async (imagePath, id) => {
         <section>
            
             { disable ? <Load /> :
+            <>
+            <Header />
             <div className="container-fluid">
             <Link className="headerIcon" to='/medical'><ion-icon name="return-down-back-outline"></ion-icon></Link >
             {
@@ -97,6 +103,7 @@ const handleDelete = async (imagePath, id) => {
                 ))
             }
             </div>
+            </>
             }
         </section>
     )
