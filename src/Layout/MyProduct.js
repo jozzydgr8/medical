@@ -9,7 +9,7 @@ export const MyProduct = ()=>{
 
     return(
         <section>
-            <div className="container-fluid">
+            <div>
             <div className="gridProduct">
             {
                 data && data.map((data)=>(

@@ -5,6 +5,8 @@ import { addDoc } from "firebase/firestore";
 import { AuthConsumer } from "../Context/ContextAuth/AuthConsumer";
 import { Link } from "react-router-dom";
 import { Load } from "./Load";
+import { Navbar } from "../Layout/Navbar";
+import { Header } from "./Header";
 
 
 export const Signup = ()=>{
@@ -54,10 +56,12 @@ export const Signup = ()=>{
         
     }
     return(
-        <>
+        <section>
+            <Navbar/>
+            <Header/>
         {
             disable ? <Load/>:
-            <div>
+            <div className="container-fluid">
                 <form>
                     <input placeholder="name" value={businessName} onChange={e=>setBusinessName(e.target.value)}/>
                     <input type="email" placeholder="email" value={email} onChange={e=>setEmail(e.target.value)} />
@@ -69,7 +73,7 @@ export const Signup = ()=>{
             
             </div>
         }
-        </>
+        </section>
 
     )
 }

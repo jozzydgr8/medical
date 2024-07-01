@@ -5,7 +5,7 @@ export const Footer = ()=>{
         <section id="footer">
             <div className="container-fluid">
 
-                <span className="ubuntu">subscribe for updates & news</span>
+                <span className="montserrat">subscribe for updates & news</span>
                 
                 <div>
                     <input type="email" placeholder="enter email address"/>
@@ -21,7 +21,7 @@ export const Footer = ()=>{
 
                 <div>
                     <div>
-                        <span className="ubuntu">Contact us</span>
+                        <span className="montserrat">Contact us</span>
                     </div>
                     <div className="footerFlex"> <ion-icon name="call-outline"></ion-icon> 08800292</div>
                     <div className="footerFlex"> <ion-icon name="location-outline"></ion-icon>lagos, lagos, lagos Nigeria</div>

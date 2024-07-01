@@ -93,7 +93,7 @@ export const Cart = () => {
         <section>
             <div className="summary container-fluid">
             <Link className="headerIcon" to='/medical'><ion-icon name="return-down-back-outline"></ion-icon></Link >
-                <span>cart summary</span>
+                <div><span>cart summary</span></div>
                 
                     <div className="subtotal">
                         subtotal: $ {reduce}

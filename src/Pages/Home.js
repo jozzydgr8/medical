@@ -4,23 +4,27 @@ import { Navbar } from '../Layout/Navbar';
 import { Admin } from "./Admin";
 import {Carousel} from './Carousel'
 import { Footer } from './Footer';
+import { Header } from './Header';
 
 
 export const Home = ()=>{
   const {user} = AuthConsumer();
     return(
-        <>
+        <section>
           <Navbar/>
+          <Header/>
           <Carousel />
         
             <div>
-              {user && user.uid === process.env.REACT_APP_acceptedID?<Admin name={user.displayName}/>:<section><div className='container-fluid'><span className='ubuntu'>shop with us</span>{user && user.displayName}</div></section>}
+              <div className='container-fluid'>
+              {user && user.uid === process.env.REACT_APP_acceptedID?<Admin name={user.displayName}/>:<section><div><div className='montserrat'>shop with us</div> {user && user.displayName}</div></section>}
               
                 <main>
                   <MyProduct/>
                 </main>
+                </div>
                 <Footer/>
             </div>
-        </>
+        </section>
     )
 }

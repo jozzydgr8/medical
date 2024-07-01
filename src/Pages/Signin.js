@@ -4,6 +4,8 @@ import { auth } from "../App";
 import { AuthConsumer } from "../Context/ContextAuth/AuthConsumer";
 import { Link } from "react-router-dom";
 import { Load } from "./Load";
+import { Header } from "./Header";
+import { Navbar } from "../Layout/Navbar";
 
 export const Signin = ()=>{
     const [email, setEmail] = useState('');
@@ -29,12 +31,13 @@ export const Signin = ()=>{
         })
     }
     return(
-        <>
-        
+        <section>
+        <Header/>
+        <Navbar/>
         {
             disable ? <Load />:
 
-            <div>
+            <div className="container-fluid">
             <form>
             <input type="email" placeholder="email" value={email} onChange={e=>setEmail(e.target.value)} />
                 <input placeholder="create password" value={password} onChange={e=>setPassword(e.target.value)} />
@@ -45,7 +48,7 @@ export const Signin = ()=>{
             
             </div>
         }
-        </>
+        </section>
 
     )
 }
