@@ -7,7 +7,6 @@ export const Root = ()=>{
 
     return(
     <section className="rootsection">
-        <Navbar/>
         <Header/>
         <main>        
             <Outlet />

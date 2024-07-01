@@ -1,6 +1,6 @@
 import { doc, deleteDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import {  colRef, storage, setLocalStorageItem  } from "../App";
 import { deleteObject, ref } from "firebase/storage"
 import { AuthConsumer } from "../Context/ContextAuth/AuthConsumer"
@@ -17,7 +17,7 @@ export const ProductTemp = ()=>{
     const [disable, setDisable] = useState(false)
     const navigate = useNavigate();
     useEffect(()=>{
-            const template = data.filter(data => id.includes(data.id));
+            const template = data && data.filter(data => id.includes(data.id));
             setTempData(template)
     
     },[data]);
@@ -65,8 +65,12 @@ const handleDelete = async (imagePath, id) => {
     // navigate('/medical')
 };
     return(
-        <>
+        <section>
+           
             { disable ? <Load /> :
+            <div className="container-fluid">
+            <Link className="headerIcon" to='/medical'><ion-icon name="return-down-back-outline"></ion-icon></Link >
+            {
                 tempData && tempData.map(tempData =>(
                         <main key={tempData.id} className="gridProduct">
                                 
@@ -92,6 +96,8 @@ const handleDelete = async (imagePath, id) => {
                             </main>
                 ))
             }
-        </>
+            </div>
+            }
+        </section>
     )
 }

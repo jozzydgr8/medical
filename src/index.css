@@ -24,6 +24,7 @@ section .container-fluid{
 }
 .headerIcon{
   font-size: xx-large;
+  cursor: pointer;
 }
 
 
@@ -359,4 +360,27 @@ nav a{
     nav a {
         font-size: 1.5rem;
     }
+}
+
+
+
+
+/* footer footer footer */
+
+#footer{
+  background: #bebdbd;
+  color: black;
+}
+#footer input{
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  padding: 7px 10px;
+  margin: 2px 0;
+}
+
+.footerFlex{
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }

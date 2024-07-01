@@ -55,7 +55,16 @@ export const Cart = () => {
 
 
     if (cart.length === 0) {
-        return <section><div className="container-fluid">add products to cart to view carts <Link to={'/medical'} className="btn btn-outline-secondary">shop</Link> </div></section>;
+        return(
+         <section>
+            
+            <div className="container-fluid">
+                    <Link className="headerIcon" to='/medical'><ion-icon name="return-down-back-outline"></ion-icon></Link >
+                    <div>add products to cart to view carts</div>
+                 <div><Link to={'/medical'} className="outline-btn">continue to shop</Link></div>
+            </div>
+        </section>
+        )
     }
 
     // remove item
@@ -83,6 +92,7 @@ export const Cart = () => {
     return (
         <section>
             <div className="summary container-fluid">
+            <Link className="headerIcon" to='/medical'><ion-icon name="return-down-back-outline"></ion-icon></Link >
                 <span>cart summary</span>
                 
                     <div className="subtotal">
@@ -116,6 +126,7 @@ export const Cart = () => {
 
                 
                     <button style={{width:'100%'}} className="full-btn">checkout {`$ ${reduce}`}</button>
+                    <Link to={'/medical'} className="outline-btn">continue to shop</Link> 
                 
             </div>
         </section>
