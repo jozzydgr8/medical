@@ -38,6 +38,7 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
 export const db = getFirestore();
 export const colRef = collection(db, 'vendor');
+export const userRef = collection(db, 'user')
 export const storage = getStorage(app);
 
 const storageEvent = new Event('storageUpdate'); 

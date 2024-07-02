@@ -21,12 +21,10 @@ export const Search = ()=>{
         }
     },[])
     const handleData = (e)=>{
-        setFilter(true)
+        setFilter(true);
         setSearch(e.target.value);
         const inputValue = e.target.value.toLowerCase();
-        if (inputValue === ''){
-            return
-        } 
+
         const searchArr = data.filter(entry => {
             const strData = JSON.stringify(entry).toLowerCase();
             return strData.includes(inputValue);
@@ -171,7 +169,7 @@ export const Search = ()=>{
                         {
                             !filter &&
                             result.map(result=>(
-                                <Link to={`/medical/${result.id}`} className="product">
+                                <Link to={`/medical/${result.id}`} className="product" key={result.id}>
                                 <div className="productImage">
                                  <img src={result.productImage} alt="productImage"/>
                                 </div>

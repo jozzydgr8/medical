@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
 import { useState } from "react"
-import { auth, colRef } from "../App";
+import { auth, userRef } from "../App";
 import { addDoc } from "firebase/firestore";
 import { AuthConsumer } from "../Context/ContextAuth/AuthConsumer";
 import { Link } from "react-router-dom";
@@ -30,7 +30,7 @@ export const Signup = ()=>{
                         displayName: businessName
                     })
                     .then(()=>{
-                        addDoc(colRef, {
+                        addDoc(userRef, {
                             businessName:businessName,
                             userId:user.uid
                         }).then(()=>{

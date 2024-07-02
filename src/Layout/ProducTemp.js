@@ -76,11 +76,12 @@ const handleDelete = async (imagePath, id) => {
             <Header />
             <div className="container-fluid">
             <Link className="headerIcon" to='/medical'><ion-icon name="return-down-back-outline"></ion-icon></Link >
+            <div  className="gridProduct">
             {
                 tempData && tempData.map(tempData =>(
-                        <main key={tempData.id} className="gridProduct">
+                        
                                 
-                                <div className="product">
+                                <div key={tempData.id} className="product">
                                 <div className="productImage">
                                 <img src={tempData.productImage} alt="image"/>
                                 </div>
@@ -99,9 +100,10 @@ const handleDelete = async (imagePath, id) => {
 
                                 </div>
                                 
-                            </main>
+                            
                 ))
             }
+            </div>
             </div>
             </>
             }
