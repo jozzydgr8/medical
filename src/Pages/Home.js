@@ -17,7 +17,8 @@ export const Home = ()=>{
         
             <div>
               <div className='container-fluid'>
-              {user && user.uid === process.env.REACT_APP_acceptedID?<Admin name={user.displayName}/>:<section><div><div className='montserrat'>shop with us</div> {user && user.displayName}</div></section>}
+              {user && user.uid === process.env.REACT_APP_acceptedID?<Admin name={user.displayName}/>:
+              <section><div className='montserrat'>shop with us {user && user.displayName}</div></section>}
               
                 <main>
                   <MyProduct/>

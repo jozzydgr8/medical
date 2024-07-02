@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {getFirestore, collection, onSnapshot} from "firebase/firestore"
 import {getAuth} from 'firebase/auth'
 import {getStorage} from 'firebase/storage'
@@ -19,6 +19,7 @@ import { ProductTemp } from "./Layout/ProducTemp";
 import { Cart } from "./Layout/Cart";
 import { Search } from "./Layout/Search";
 import { Load } from "./Pages/Load";
+import { Shipping } from "./Pages/Shipping";
 
 
 // init firebase
@@ -54,7 +55,8 @@ function App() {
   const {user, loading} = AuthConsumer();
   const {dispatch, loading:load} = UseContextData();
   useEffect(()=>{
-    dispatch({type:'loading', payload:true})
+    dispatch({type:'loading', payload:true});
+     
     const unSubscribe = onSnapshot(colRef, (snapshot)=>{
         const data = []
         const dataRef = snapshot.docs.forEach(doc=>{
@@ -81,6 +83,9 @@ function App() {
         <Route path='signin' element={!user ? <Signin />: <Navigate to ={'/'}/>} />
         <Route path="uploadproduct" element ={user ? <UploadProduct />: <Navigate to={'/signin'} />} />
         <Route path=":id" element={<ProductTemp />} />
+        <Route path={"cart"} element={<Cart/>} />
+        <Route path="shipping" element={<Shipping/>} />
+
       </Route>
       <Route path="/medical" element={<Root/>}>
         <Route index element={<Home />} />
@@ -89,7 +94,7 @@ function App() {
         <Route path="uploadproduct" element ={user ? <UploadProduct />: <Navigate to={'signin'} />} />
         <Route path=":id" element={<ProductTemp />} />
         <Route path={"cart"} element={<Cart/>} />
-        <Route path={"search"} element={<Search />} />
+        <Route path="shipping" element={<Shipping/>} />
       </Route>
       </>
 

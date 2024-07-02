@@ -125,7 +125,7 @@ export const Cart = () => {
                 ))}
 
                 
-                    <button style={{width:'100%'}} className="full-btn">checkout {`$ ${reduce}`}</button>
+                    <Link to={'/medical/shipping'} style={{width:'100%'}} className="full-btn">checkout {`$ ${reduce}`}</Link>
                     <Link to={'/medical'} className="outline-btn">continue to shop</Link> 
                 
             </div>
