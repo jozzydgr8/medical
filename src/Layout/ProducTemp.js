@@ -90,6 +90,8 @@ const handleDelete = async (imagePath, id) => {
                                 <div className="productDetail">
                                     <div>{tempData.product}</div>
                                     <div>price: {tempData.prize}</div>
+
+                                    <div>{tempData.description}</div>
                                     
                                     <div>
                                         <button onClick={()=>addCart(tempData.id)} className="full-btn">Add to cart</button>

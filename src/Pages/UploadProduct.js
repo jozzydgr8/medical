@@ -5,6 +5,9 @@ import {v4} from 'uuid'
 import { addDoc } from "firebase/firestore";
 import axios from "axios";
 import { Load } from "./Load";
+import { Link } from "react-router-dom";
+import { Header } from "./Header";
+import { Navbar } from "../Layout/Navbar";
 
 
 
@@ -17,6 +20,7 @@ export const UploadProduct = ()=>{
     const [productOwner, setProductOwner] = useState('');
     const [prize, setPrize] = useState('');
     const [stock, setStock] = useState('');
+    const [description, setDescription] = useState('');
     const [formMessage, setFormMessage] = useState('');
  
 
@@ -47,7 +51,7 @@ export const UploadProduct = ()=>{
     
       const handleProduct = async (e) => {
         e.preventDefault();
-        if(prize === '' || stock ==='' || productName === ''|| imageUpload === ''|| sizes === ''|| category === ''){
+        if(description === ''||prize === '' || stock ==='' || productName === ''|| imageUpload === ''|| sizes === ''|| category === ''){
           setFormMessage('all fields required')
           return
         }
@@ -66,7 +70,8 @@ export const UploadProduct = ()=>{
             productOwner: productOwner.toLowerCase(),
             prize: prize + '$',
             imagePath: imagePath,
-            stock:stock
+            stock:stock,
+            description:description
           });
           setProductName('');
           setCategory('');
@@ -90,8 +95,11 @@ export const UploadProduct = ()=>{
         {
           disable ? <Load/> :
           <section>
+          <Header/>
           <div className="container-fluid">
+          
           <form>
+          <Link className="headerIcon" to='/medical'><ion-icon name="return-down-back-outline"></ion-icon></Link >
               <input type="file" accept="image/jpeg, image/png" onChange={e => {const file = e.target.files[0];
                if(file.size > 5 * 1024 * 1024){
                   alert('file size is than 5mb limit');
@@ -116,6 +124,13 @@ export const UploadProduct = ()=>{
               </select>
               <input value={sizes} onChange={e=>setSizes(e.target.value)} placeholder="size" required />
               {/* <span>seperate each sizes with a delimiter like comma !</span> */}
+
+              <textarea value={description} onChange={(e)=>{
+                const desc = e.target.value;
+                if(desc.length > 150){
+                  return
+                }
+                setDescription(desc)}} placeholder='write a description for your product not more than 150 characters' required/>
 
               <button className="full-btn" onClick={handleProduct} disabled={disable}>submit</button>
               {formMessage}
