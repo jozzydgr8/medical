@@ -23,7 +23,7 @@ section .container-fluid{
   align-items: center;
 }
 .headerIcon{
-  font-size: xx-large;
+  font-size: x-large;
   cursor: pointer;
 }
 
@@ -98,11 +98,25 @@ a{text-decoration: none; color:inherit}
   color: var(--primary);
 }
 .togglerbadge{
-  padding: 5px;
+  padding: 0;
+  top:40px;
 }
 @media (max-width: 991px) {
   .badge{
     top: 18px;
+  }
+  .togglerbadge{
+    top:10px
+  }
+}
+@media (min-width: 700px) and (max-width:991px){
+  .togglerbadge{
+    top:15px
+  }
+}
+@media (min-width:992px) and (max-width:1290px) {
+  .togglerbadge{
+    top:30px
   }
 }
 .sacramento{
@@ -115,7 +129,7 @@ a{text-decoration: none; color:inherit}
   font-weight: 200;
   font-style: normal;
   text-transform: capitalize;
-  font-size: xx-large;
+  font-size: x-large;
 }
 .montserrat {
   font-family: "Montserrat", sans-serif;

@@ -7,6 +7,7 @@ import { AuthConsumer } from "../Context/ContextAuth/AuthConsumer"
 import { UseContextData } from "../Context/ContextAuth/ContextProvider/UseContextData";
 import { Load } from "../Pages/Load";
 import { Header } from "../Pages/Header";
+import { Navbar } from "./Navbar";
 
 export const ProductTemp = ()=>{
     const {id} = useParams();
@@ -73,6 +74,7 @@ const handleDelete = async (imagePath, id) => {
            
             { disable ? <Load /> :
             <>
+            <Navbar/>
             <Header />
             <div className="container-fluid">
             <Link className="headerIcon" to='/medical'><ion-icon name="return-down-back-outline"></ion-icon></Link >
@@ -90,7 +92,7 @@ const handleDelete = async (imagePath, id) => {
                                     <div>price: {tempData.prize}</div>
                                     
                                     <div>
-                                        <button onClick={()=>addCart(id)} className="full-btn">Add to cart</button>
+                                        <button onClick={()=>addCart(tempData.id)} className="full-btn">Add to cart</button>
                                     </div>
 
                                     {user && user.uid === process.env.REACT_APP_acceptedID && <button className="outline-btn" onClick={()=>setWarn(true)}>delete</button>}
