@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { UseContextData } from "../Context/ContextAuth/ContextProvider/UseContextData";
 import { Link } from "react-router-dom";
-import { setLocalStorageItem } from "../App";
+import { cartRef, setLocalStorageItem } from "../App";
 import { Steps } from "antd";
 import { Load } from "../Pages/Load";
 import { PaystackButton } from "react-paystack";
+import { addDoc } from "firebase/firestore";
 
 export const Cart = () => {
     const [cart, setCart] = useState([]);
@@ -119,10 +120,33 @@ export const Cart = () => {
     //on ship checkout
     const onSubmitShip = (e)=>{
         e.preventDefault();
+        if(method == ''){
+            alert('pick a shipping method')
+            return
+        }
         setShowBtn(true);
         console.log(current)
     }
 
+
+    const createSummary = ()=>{
+        return{
+            email,
+            firstName,
+            lastName,
+            address,
+            deliveryMethod: method,
+            date: new Date().toISOString(),
+            phoneNumber,
+            total:totalFee,
+            items: cart.map(item=>({
+                productID: item.id,
+                prodductName:item.product,
+                quantity:amounts[item.id],
+                price:item.prize
+            }))
+        }
+    }
     const componentProp={
         email,
         amount:totalFee * 100,
@@ -132,7 +156,14 @@ export const Cart = () => {
         },
         publicKey,
         text:`checkout ${totalFee}`,
-        onSuccess:()=>{alert('succesful')},
+        onSuccess:()=>{alert('succesful')
+            const summary = createSummary()
+            try{
+                addDoc(cartRef,summary)
+            }catch(error){
+                console.error(error)
+            }
+        },
         onClose:()=>{alert('closing')}
     }
 
@@ -193,7 +224,7 @@ return(
 
 
 
-const ProductCart = ({cart, setCart, amounts, setAmounts, removeItem,
+const ProductCart = ({cart, amounts, removeItem,
     increaseAmount, decreaseAmount, reduce, onSubmit})=>{
         return(
             <section>
@@ -233,7 +264,6 @@ const ProductCart = ({cart, setCart, amounts, setAmounts, removeItem,
                 
                     <button onClick={onSubmit}  style={{width:'100%'}} className="full-btn">checkout {`$ ${reduce}`}</button>
                     <Link to={'/medical'} className="outline-btn">continue to shop</Link> 
-                    <button onClick={console.log('lol')}>wtf</button>
             </div>
         </section>
         )
@@ -252,7 +282,7 @@ const ProductCart = ({cart, setCart, amounts, setAmounts, removeItem,
     isChecked2, setIsChecked2, setIsChecked1, isChecked1,
     phoneNumber, setPhoneNumber, address, setAddress, showBtn,
     country, setCountry, state, setState, city, setCity,totalFee,
-    method, setMethod, email, setEmail, componentProp})=>{
+    setMethod, email, setEmail, componentProp})=>{
 
     return(
         <section>

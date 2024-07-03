@@ -39,6 +39,7 @@ export const db = getFirestore();
 export const colRef = collection(db, 'vendor');
 export const userRef = collection(db, 'user')
 export const storage = getStorage(app);
+export const cartRef = collection(db, 'cart')
 
 const storageEvent = new Event('storageUpdate'); 
 export const setLocalStorageItem = ((key, value)=>{
