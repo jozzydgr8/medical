@@ -17,9 +17,7 @@ import { Signin } from "./Pages/Signin";
 import {UploadProduct} from "./Pages/UploadProduct"
 import { ProductTemp } from "./Layout/ProducTemp";
 import { Cart } from "./Layout/Cart";
-import { Search } from "./Layout/Search";
 import { Load } from "./Pages/Load";
-import { Shipping } from "./Pages/Shipping";
 
 
 // init firebase
@@ -84,17 +82,17 @@ function App() {
         <Route path="uploadproduct" element ={user ? <UploadProduct />: <Navigate to={'/signin'} />} />
         <Route path=":id" element={<ProductTemp />} />
         <Route path={"cart"} element={<Cart/>} />
-        <Route path="shipping" element={<Shipping/>} />
+
 
       </Route>
       <Route path="/medical" element={<Root/>}>
         <Route index element={<Home />} />
         <Route path="signup" element={!user ? <Signup/>: <Navigate to={'/medical'} />} />
         <Route path='signin' element={!user ? <Signin />: <Navigate to ={'/medical'}/>} />
-        <Route path="uploadproduct" element ={user ? <UploadProduct />: <Navigate to={'signin'} />} />
+        <Route path="uploadproduct" element ={user ? <UploadProduct />: <Navigate to={'/medical/signin'} />} />
         <Route path=":id" element={<ProductTemp />} />
         <Route path={"cart"} element={<Cart/>} />
-        <Route path="shipping" element={<Shipping/>} />
+
       </Route>
       </>
 

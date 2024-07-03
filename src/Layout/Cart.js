@@ -2,12 +2,34 @@ import { useState, useEffect } from "react";
 import { UseContextData } from "../Context/ContextAuth/ContextProvider/UseContextData";
 import { Link } from "react-router-dom";
 import { setLocalStorageItem } from "../App";
+import { Steps } from "antd";
+import { Load } from "../Pages/Load";
+import { PaystackButton } from "react-paystack";
 
 export const Cart = () => {
     const [cart, setCart] = useState([]);
+    const [cartValue, setCartValue] = useState('');
+    const [showBtn, setShowBtn] = useState(false);
+    const [shipValue, setShipValue] = useState(null);
+    const [shipFee, setShipFee] = useState(0)
+    const [disable, setDisable] = useState(false);
+    const [current, setCurrent] = useState(0)
     const { data } = UseContextData();
     const [amounts, setAmounts] = useState({});
-    const [carts, setCarts] = useState([])
+    const [carts, setCarts] = useState([]);
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [address, setAddress] = useState('');
+    const [country, setCountry]= useState('');
+    const [state, setState] = useState('');
+    const [city, setCity] = useState('');
+    const [method, setMethod] = useState('');
+    const [email,setEmail] = useState('');
+    const [isChecked, setIsChecked] = useState(false);
+    const [isChecked1, setIsChecked1] = useState(false);
+    const [isChecked2, setIsChecked2] = useState(false);
+    const publicKey = "pk_test_0e745897d2bb51a12c4fca668a094dcecd425aea"
 
 
     useEffect(() => {
@@ -51,9 +73,6 @@ export const Cart = () => {
     }, []);
 
 
-
-
-
     if (cart.length === 0) {
         return(
          <section>
@@ -88,9 +107,96 @@ export const Cart = () => {
         setAmounts(prev => ({ ...prev, [id]: Math.max(prev[id] - 1, 1) }));
     };
 
+    const totalFee = parseFloat(reduce + shipFee);
+
+
+    //on carrt checkout
+    const onSubmitCart = ()=>{
+        // console.log(current)
+        setCurrent(1)
+    }
+
+    //on ship checkout
+    const onSubmitShip = (e)=>{
+        e.preventDefault();
+        setShowBtn(true);
+        console.log(current)
+    }
+
+    const componentProp={
+        email,
+        amount:totalFee * 100,
+        metaData:{
+            firstName,
+            phoneNumber
+        },
+        publicKey,
+        text:`checkout ${totalFee}`,
+        onSuccess:()=>{alert('succesful')},
+        onClose:()=>{alert('closing')}
+    }
+
     
-    return (
-        <section>
+
+    const displayForms =[
+        <ProductCart cart={cart} setCart={setCart} amounts={amounts} setAmounts={setAmounts} removeItem={removeItem} onSubmit={onSubmitCart}
+                    
+                     increaseAmount={increaseAmount} decreaseAmount={decreaseAmount} reduce={reduce}  />,
+        <Shipping totalFee={totalFee} firstName={firstName} setFirstName={setFirstName} lastName={lastName} setLastName={setLastName}
+                  onSubmit={onSubmitShip} PaystackButton={PaystackButton} componentProp={componentProp}
+                  shipFee={shipFee} setShipFee={setShipFee} reduce={reduce} showBtn={showBtn}
+                  phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} address={address} setAddress={setAddress}
+                  country={country} setCountry={setCountry} state={state} setState={setState} city={city} setCity={setCity}
+                  method={method} setMethod={setMethod} email={email} setEmail={setEmail} isChecked2={isChecked2} setIsChecked2={setIsChecked2} 
+                  isChecked1={isChecked1} setIsChecked1={setIsChecked1} isChecked={isChecked} setIsChecked={setIsChecked}
+        />,
+
+        <Order/>
+    ]
+
+    // const isStepDisable = (stepNumber)=>{
+    //     if(stepNumber === 0){
+    //         return false
+    //     }
+    //     if(stepNumber === 1){
+    //         return shipValue === null
+    //     }
+    // }
+return(
+    <section>
+    <div className='container-fluid'>
+        {
+            disable ? <Load />:
+        <>
+        
+         <Steps onChange={setCurrent} current={current}>
+            <Steps.Step  title='cart' icon={<ion-icon name="cart-outline"></ion-icon>} />
+            <Steps.Step  title='shipping' icon={<ion-icon name="bicycle-outline"></ion-icon>} />
+            <Steps.Step  title='congratulations' icon={<ion-icon name="bag-check-outline"></ion-icon>} />
+        </Steps>
+        
+            {displayForms[current]}
+
+        </>
+        }
+
+        
+    </div>
+</section>
+)}
+
+
+
+
+
+
+
+
+
+const ProductCart = ({cart, setCart, amounts, setAmounts, removeItem,
+    increaseAmount, decreaseAmount, reduce, onSubmit})=>{
+        return(
+            <section>
             <div className="summary container-fluid">
             <Link className="headerIcon" to='/medical'><ion-icon name="return-down-back-outline"></ion-icon></Link >
                 <div><span>cart summary</span></div>
@@ -125,10 +231,130 @@ export const Cart = () => {
                 ))}
 
                 
-                    <Link to={'/medical/shipping'} style={{width:'100%'}} className="full-btn">checkout {`$ ${reduce}`}</Link>
+                    <button onClick={onSubmit}  style={{width:'100%'}} className="full-btn">checkout {`$ ${reduce}`}</button>
                     <Link to={'/medical'} className="outline-btn">continue to shop</Link> 
+                    <button onClick={console.log('lol')}>wtf</button>
+            </div>
+        </section>
+        )
+    }
+
+
+
+
+
+
+
+
+
+ const Shipping = ({firstName, onSubmit, setFirstName, lastName, setLastName,isChecked, setIsChecked,
+    setShipFee,
+    isChecked2, setIsChecked2, setIsChecked1, isChecked1,
+    phoneNumber, setPhoneNumber, address, setAddress, showBtn,
+    country, setCountry, state, setState, city, setCity,totalFee,
+    method, setMethod, email, setEmail, componentProp})=>{
+
+    return(
+        <section>
+            <div className="container-fluid">
+            <Link className="headerIcon" to='/medical'><ion-icon name="return-down-back-outline"></ion-icon></Link >
+                <div className="montserrat">shipping address</div>
+                <form   onSubmit={onSubmit}  >
+                    <div>
+                        <input value={firstName} placeholder="Enter your first name" onChange={(e)=>setFirstName(e.target.value)} required />
+                    </div>
+                    <div>
+                        <input value={lastName} placeholder="Enter yout last name" onChange={(e)=>setLastName(e.target.value)} required />
+                    </div>
+                    <div>
+                        <input value={phoneNumber} placeholder="Enter your phone number" type="phone" onChange={(e)=>setPhoneNumber(e.target.value)} required />
+                    </div>
+                    <div>
+                        <input value={address} placeholder="Enter address" onChange={(e)=>setAddress(e.target.value)} required />
+                    </div>
+                    <div>
+                        <input value={country} placeholder="Country" onChange ={(e)=>setCountry(e.target.value)} required />
+                    </div>
+                    <div>
+                        <input value={state} placeholder="State" onChange={(e)=>setState(e.target.value)} required />
+                    </div>
+                    <div>
+                        <input value={city} placeholder="City" onChange={(e)=>setCity(e.target.value)} required />
+                    </div>
+                    <div>
+                        <input value={email} placeholder="email" type="email" onChange={(e)=>setEmail(e.target.value)} required/>
+                    </div>
+                    <div>
+                        <div className="montserrat">shipping method</div>
+                        <div>
+                        <input type="checkbox" checked={isChecked} onChange={(e)=>{
+                            setIsChecked(true);
+                            setIsChecked2(false);
+                            setIsChecked1(false);
+                            setMethod('customer pickup');
+                            setShipFee(parseFloat(0))
+                        }} /> <div>customer pick up <span>free</span></div>
+                        </div>
+
+                        <div>
+                        <input name="pickUp" type="checkbox"
+                        checked={isChecked2} onChange={(e)=>{
+                            if(e.target.checked){
+                                setIsChecked(false);
+                                setIsChecked2(true);
+                                setIsChecked1(false);
+                                setShipFee(parseFloat(50))
+                                setMethod('delivery within lagos');
+                            }
+
+                        }}
+                         /> <div> delivery within lagos <span>$50</span></div>
+                        </div>
+                        
+                        <div>
+                        <input name="pickUp" type="checkbox"
+                        checked={isChecked1} onChange={(e)=>{
+                            if(e.target.checked){
+                                setIsChecked(false);
+                                setIsChecked2(false);
+                                setIsChecked1(true);
+                                setMethod('delivery outside lagos');
+                                setShipFee(parseFloat(200))
+                            }
+
+                        }}
+                         /> <div>delivery outside lagos <span>$200</span></div>
+                        </div>
+                    </div>
+
+
+                        <div>Total Price: ${totalFee}</div>
+                        {showBtn?<PaystackButton style={{width:'100%'}} className="full-btn" {...componentProp}/>:
+                        <div>
+                            <button style={{width:'100%'}} className="full-btn">checkout {`$ ${totalFee}`}</button>
+                            <Link to={'/medical'} className="outline-btn">continue to shop</Link> 
+                        </div>
+                        
+                        }
+                    
+                </form>
+            
                 
             </div>
         </section>
-    );
-};
+    )
+}
+
+
+
+
+
+
+const Order = ({})=>{
+    return(
+        <>
+            congratulations
+        </>
+    )
+}
+   

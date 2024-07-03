@@ -45,6 +45,7 @@ export const Search = ()=>{
         
         {
             !activeSearch ? 
+            <div className="container-fluid">
             <div className="searchFeature">
                     <form onSubmit={handleFilter} className="d-flex" role="search">
                     <div class="input-group">
@@ -60,7 +61,7 @@ export const Search = ()=>{
                             
                              {
                                 filterDiagnostic != 0 && filterPPE != 0 && filterRehab != 0 && filterSurgical != 0 &&
-                                <div className="container-fluid">
+                                
                                 <main className="categoryMain" >   
                                 <span className="montserrat">categories</span>                          
                                 <div className='categoryFlex'>
@@ -136,10 +137,11 @@ export const Search = ()=>{
                                 
     
                                 </main>
-                                </div>
+                                
                              }
                         
                     </section>
+            </div>
             </div>:
                     <div className="searchFeature activeSearch">
                     <form onSubmit={handleFilter} className="d-flex" role="search">

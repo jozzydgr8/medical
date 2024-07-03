@@ -77,7 +77,7 @@ const handleDelete = async (imagePath, id) => {
             <Navbar/>
             <Header />
             <div className="container-fluid">
-            <Link className="headerIcon" to='/medical'><ion-icon name="return-down-back-outline"></ion-icon></Link >
+             
             <div  className="gridProduct">
             {
                 tempData && tempData.map(tempData =>(

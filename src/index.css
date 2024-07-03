@@ -146,10 +146,10 @@ form{
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: 2% 10%;
 }
 form input, form select {
   padding: 3px;
+  width: 100%;
   border: solid 0.2px  rgb(177, 177, 177);
  
 }
