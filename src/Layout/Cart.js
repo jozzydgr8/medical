@@ -9,7 +9,6 @@ import { addDoc } from "firebase/firestore";
 
 export const Cart = () => {
     const [cart, setCart] = useState([]);
-    const [cartValue, setCartValue] = useState('');
     const [showBtn, setShowBtn] = useState(false);
     const [shipValue, setShipValue] = useState(null);
     const [shipFee, setShipFee] = useState(0)
@@ -30,8 +29,7 @@ export const Cart = () => {
     const [isChecked, setIsChecked] = useState(false);
     const [isChecked1, setIsChecked1] = useState(false);
     const [isChecked2, setIsChecked2] = useState(false);
-    const publicKey = "pk_test_0e745897d2bb51a12c4fca668a094dcecd425aea"
-
+    const publicKey = process.env.REACT_APP_gateWayKey;
 
     useEffect(() => {
         const updateDelete = ()=>{
@@ -74,6 +72,8 @@ export const Cart = () => {
     }, []);
 
 
+    //if no cart
+
     if (cart.length === 0) {
         return(
          <section>
@@ -87,7 +87,7 @@ export const Cart = () => {
         )
     }
 
-    // remove item
+    // remove item function to remove item for cart
     const removeItem = (id)=>{
         if(!carts){
             return
@@ -96,28 +96,32 @@ export const Cart = () => {
         setLocalStorageItem('cart', JSON.stringify(updatedCart))
     }
 
+// reduce function to calculate amounts for individual elements in the cart array
     const reduce = cart.map(cart => (
         parseFloat(cart.prize) * amounts[cart.id]
     )).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
+    // increment function to setamountn update
     const increaseAmount = (id) => {
         setAmounts(prev => ({ ...prev, [id]: prev[id] + 1 }));
     };
-
+//decrement function to setamount update
     const decreaseAmount = (id) => {
         setAmounts(prev => ({ ...prev, [id]: Math.max(prev[id] - 1, 1) }));
     };
 
+
+    //constant to determin all fees to be paid including delivery fees
     const totalFee = parseFloat(reduce + shipFee);
 
 
-    //on carrt checkout
+    //on carrt checkout function whenn ready to cashout after cart
     const onSubmitCart = ()=>{
         // console.log(current)
         setCurrent(1)
     }
 
-    //on ship checkout
+    //on ship checkout function when ship form is submitted
     const onSubmitShip = (e)=>{
         e.preventDefault();
         if(method == ''){
@@ -125,10 +129,9 @@ export const Cart = () => {
             return
         }
         setShowBtn(true);
-        console.log(current)
     }
 
-
+//summary of cart function to be stored in the order or  cart database
     const createSummary = ()=>{
         return{
             email,
@@ -147,6 +150,8 @@ export const Cart = () => {
             }))
         }
     }
+
+    //componennt prop for paystack btn for payments and onSuccess functions
     const componentProp={
         email,
         amount:totalFee * 100,
@@ -163,18 +168,24 @@ export const Cart = () => {
             }catch(error){
                 console.error(error)
             }
+            setShipValue(true)
+            setCurrent(2)
+            setShowBtn(false);
+            setLocalStorageItem('cart', JSON.stringify([]))
         },
         onClose:()=>{alert('closing')}
     }
 
     
 
+
+    //display forms array forms to be displayed in step
     const displayForms =[
         <ProductCart cart={cart} setCart={setCart} amounts={amounts} setAmounts={setAmounts} removeItem={removeItem} onSubmit={onSubmitCart}
                     
                      increaseAmount={increaseAmount} decreaseAmount={decreaseAmount} reduce={reduce}  />,
         <Shipping totalFee={totalFee} firstName={firstName} setFirstName={setFirstName} lastName={lastName} setLastName={setLastName}
-                  onSubmit={onSubmitShip} PaystackButton={PaystackButton} componentProp={componentProp}
+                  onSubmit={onSubmitShip} componentProp={componentProp}
                   shipFee={shipFee} setShipFee={setShipFee} reduce={reduce} showBtn={showBtn}
                   phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} address={address} setAddress={setAddress}
                   country={country} setCountry={setCountry} state={state} setState={setState} city={city} setCity={setCity}
@@ -203,7 +214,7 @@ return(
          <Steps onChange={setCurrent} current={current}>
             <Steps.Step  title='cart' icon={<ion-icon name="cart-outline"></ion-icon>} />
             <Steps.Step  title='shipping' icon={<ion-icon name="bicycle-outline"></ion-icon>} />
-            <Steps.Step  title='congratulations' icon={<ion-icon name="bag-check-outline"></ion-icon>} />
+            <Steps.Step  title='orders'  icon={<ion-icon name="bag-check-outline"></ion-icon>} />
         </Steps>
         
             {displayForms[current]}
@@ -383,7 +394,7 @@ const ProductCart = ({cart, amounts, removeItem,
 const Order = ({})=>{
     return(
         <>
-            congratulations
+            congratulations order has been received!
         </>
     )
 }
