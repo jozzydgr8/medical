@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { UseContextData } from "../Context/ContextAuth/ContextProvider/UseContextData";
 import { Link } from "react-router-dom";
 import { cartRef, setLocalStorageItem } from "../App";
-import { Steps } from "antd";
+import { Steps, message } from "antd";
 import { Load } from "../Pages/Load";
 import { PaystackButton } from "react-paystack";
 import { addDoc } from "firebase/firestore";
@@ -161,7 +161,9 @@ export const Cart = () => {
         },
         publicKey,
         text:`checkout ${totalFee}`,
-        onSuccess:()=>{alert('succesful')
+        onSuccess:()=>{ 
+            setTimeout(()=>{
+            message.success('order has been received')}, 2000)
             const summary = createSummary()
             try{
                 addDoc(cartRef,summary)
@@ -173,7 +175,11 @@ export const Cart = () => {
             setShowBtn(false);
             setLocalStorageItem('cart', JSON.stringify([]))
         },
-        onClose:()=>{alert('closing')}
+        onClose:()=>{
+        setTimeout(()=>{
+        message.error('payment closed');
+        })
+        }
     }
 
     
@@ -249,7 +255,7 @@ const ProductCart = ({cart, amounts, removeItem,
                     </div>
    
                 {cart.map(cart => (
-                    <div key={cart.id} className="cartDiv">
+                    <div key={cart.id} className="cartDiv" style={{borderRadius:"15px"}}>
                         <div className="cartSubDiv row">
                             <div className="cartImgDiv col-md-6">
                                 <img src={`${cart.productImage}`} alt={cart.product} />

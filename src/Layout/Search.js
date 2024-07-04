@@ -156,7 +156,7 @@ export const Search = ()=>{
                    <main className="summary searchMap">
                         {
                             result.map(search =>(
-                                <Link className="cartDiv searchLink" key={search.id} to={`/medical/${search.id}`}>
+                                <Link className="cartDiv searchLink"  key={search.id} to={`/medical/${search.id}`}>
                                     <div className="cartDetail searchDiv" >
                                         {search.product} <span className="searchLogo"><ion-icon name="cart-outline"></ion-icon></span>
                                     </div>

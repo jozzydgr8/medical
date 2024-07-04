@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Load } from "./Load";
 import { Header } from "./Header";
 import { Navbar } from "../Layout/Navbar";
+import { message } from "antd";
 
 export const Signin = ()=>{
     const [email, setEmail] = useState('');
@@ -26,6 +27,9 @@ export const Signin = ()=>{
         }).catch(error=>{
             console.log(error)
             let err = error.message.split('Firebase:')
+            setTimeout(()=>{
+                message.error('login error');
+            }, 2000)
             setErrorMessage(err[1]);
             setDisable(false)
         })

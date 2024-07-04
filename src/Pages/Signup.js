@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Load } from "./Load";
 import { Navbar } from "../Layout/Navbar";
 import { Header } from "./Header";
+import { message } from "antd";
 
 
 export const Signup = ()=>{
@@ -48,7 +49,10 @@ export const Signup = ()=>{
 
         }).catch(error=>{
         console.log(error);
-        let err = error.message.split('Firebase:')
+        let err = error.message.split('Firebase:');
+        setTimeout(()=>{
+            message.error('error creating account')
+        }, 2000)
         setErrorMessage(err[1]);
         setDisable(false)
         

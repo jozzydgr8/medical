@@ -8,6 +8,7 @@ import { UseContextData } from "../Context/ContextAuth/ContextProvider/UseContex
 import { Load } from "../Pages/Load";
 import { Header } from "../Pages/Header";
 import { Navbar } from "./Navbar";
+import { message } from "antd";
 
 export const ProductTemp = ()=>{
     const {id} = useParams();
@@ -36,8 +37,16 @@ const addCart = (id)=>{
     }else{
         const check = cart.filter(cart => id.includes(cart));
         if(check.length === 0){
+            setTimeout(()=>{
+                message.success('added to cart succesfully')
+            }, 2000)
             cart.push(id);
             setLocalStorageItem('cart',JSON.stringify(cart))
+
+        }else{
+            setTimeout(()=>{
+                message.warning('item already added to cart')
+            },2000)
         }
   
     }
@@ -77,7 +86,7 @@ const handleDelete = async (imagePath, id) => {
             <Navbar/>
             <Header />
             <div className="container-fluid">
-             
+            <Link className="headerIcon" to='/medical'><ion-icon name="return-down-back-outline"></ion-icon></Link >
             <div  className="gridProduct">
             {
                 tempData && tempData.map(tempData =>(
