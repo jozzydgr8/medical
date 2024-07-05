@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/medical/static/css/main.82132769.css",
-    "main.js": "/medical/static/js/main.741c476f.js",
+    "main.css": "/medical/static/css/main.c80d6e21.css",
+    "main.js": "/medical/static/js/main.9d1beada.js",
     "static/js/453.9f5fe743.chunk.js": "/medical/static/js/453.9f5fe743.chunk.js",
     "index.html": "/medical/index.html",
-    "main.82132769.css.map": "/medical/static/css/main.82132769.css.map",
-    "main.741c476f.js.map": "/medical/static/js/main.741c476f.js.map",
+    "main.c80d6e21.css.map": "/medical/static/css/main.c80d6e21.css.map",
+    "main.9d1beada.js.map": "/medical/static/js/main.9d1beada.js.map",
     "453.9f5fe743.chunk.js.map": "/medical/static/js/453.9f5fe743.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.82132769.css",
-    "static/js/main.741c476f.js"
+    "static/css/main.c80d6e21.css",
+    "static/js/main.9d1beada.js"
   ]
 }
