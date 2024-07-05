@@ -14,10 +14,11 @@ import { Root } from "./Layout/Root";
 import { Home } from "./Pages/Home";
 import { Signup } from "./Pages/Signup";
 import { Signin } from "./Pages/Signin";
-import {UploadProduct} from "./Pages/UploadProduct"
+import {UploadProduct} from "./Pages/Admin/UploadProduct"
 import { ProductTemp } from "./Layout/ProducTemp";
 import { Cart } from "./Layout/Cart";
 import { Load } from "./Pages/Load";
+import { Order } from "./Pages/Order";
 
 
 // init firebase
@@ -67,6 +68,19 @@ function App() {
       return ()=> unSubscribe();
       
     },[]);
+    useEffect(()=>{
+      dispatch({type:'loading', payload:true});
+      const unSubscribe = onSnapshot(cartRef, (snapshot)=>{
+          const data = []
+          const dataRef = snapshot.docs.forEach(doc=>{
+            data.push({...doc.data(), id:doc.id});
+            dispatch({type:'getOrder', payload:data}) 
+            // setLocalStorageItem('order', JSON.stringify(data));
+          });
+        });
+        dispatch({type:'loading', payload:false});
+        return ()=>unSubscribe();
+  },[]);
 
   if(loading || load){
     return <Load />
@@ -83,6 +97,7 @@ function App() {
         <Route path="uploadproduct" element ={user ? <UploadProduct />: <Navigate to={'/signin'} />} />
         <Route path=":id" element={<ProductTemp />} />
         <Route path={"cart"} element={<Cart/>} />
+        <Route path="orders" element={<Order/>} />
 
 
       </Route>
@@ -93,6 +108,7 @@ function App() {
         <Route path="uploadproduct" element ={user ? <UploadProduct />: <Navigate to={'/medical/signin'} />} />
         <Route path=":id" element={<ProductTemp />} />
         <Route path={"cart"} element={<Cart/>} />
+        <Route path="orders" element={<Order/>} />
 
       </Route>
       </>

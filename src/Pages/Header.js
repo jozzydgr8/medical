@@ -36,6 +36,7 @@ export const Header = ()=>{
         .then(()=>{
             const emptyCart = [];
             setLocalStorageItem('cart',JSON.stringify(emptyCart))
+            setLocalStorageItem('order',JSON.stringify(emptyCart))
             dispatch({type:'signUser', payload:null}); 
         })
     }
@@ -45,11 +46,24 @@ export const Header = ()=>{
             <div className="headerFlex">
                 <NavLink to='/medical' className="ubuntu">Medical shop</NavLink>
 
-                <div className="headerIcon"><NavLink to={'/medical/cart'}><ion-icon name="notifications-outline"></ion-icon>{ count > 0 &&<div className='togglerbadge'>{count}</div>}</NavLink> {user ?  <><ion-icon onClick={handleLogOut} name="log-out-outline"></ion-icon></> :
-                <NavLink to='signin'>
+                <div className="headersIcon">
+                <div><NavLink className={'headerIcon'} to={'/medical/cart'}><ion-icon name="notifications-outline"></ion-icon>
+                { count > 0 &&<div className='togglerbadge'>{count}</div>}</NavLink></div>
+                <span> </span>
+                <div >
+                
+                {user ?<div className="headersIcon"><ion-icon onClick={handleLogOut} name="log-out-outline"></ion-icon>
+                <span className="" style={{fontSize:'12px'}}> logout</span></div> :
+                <NavLink to='signin' className={'headersIcon'}>
                 <ion-icon name="person-add-outline"></ion-icon> 
-                     <small style={{fontSize:'15px'}}> login</small>
-                </NavLink> }</div>
+                     <span className="" style={{fontSize:'12px'}}> login</span>
+                </NavLink> }
+                </div>
+
+                <div><NavLink to={'/medical/orders'} className={'headersIcon'}><ion-icon name="bus-outline"></ion-icon>
+                 <span className="" style={{fontSize:'12px'}}>order</span></NavLink></div>
+                </div>
+                
             </div>
 
             

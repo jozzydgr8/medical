@@ -1,7 +1,7 @@
 import { AuthConsumer } from '../Context/ContextAuth/AuthConsumer';
 import{MyProduct} from '../Layout/MyProduct'
 import { Navbar } from '../Layout/Navbar';
-import { Admin } from "./Admin";
+import { Admin } from "./Admin/Admin";
 import {Carousel} from './Carousel'
 import { Footer } from './Footer';
 import { Header } from './Header';

@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
 import { UseContextData } from "../Context/ContextAuth/ContextProvider/UseContextData";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { cartRef, setLocalStorageItem } from "../App";
 import { Steps, message } from "antd";
 import { Load } from "../Pages/Load";
 import { PaystackButton } from "react-paystack";
 import { addDoc } from "firebase/firestore";
+import { AuthConsumer } from "../Context/ContextAuth/AuthConsumer";
 
 export const Cart = () => {
     const [cart, setCart] = useState([]);
     const [showBtn, setShowBtn] = useState(false);
     const [shipValue, setShipValue] = useState(null);
+    const [cartValue, setCartValue] = useState(null);
     const [shipFee, setShipFee] = useState(0)
     const [disable, setDisable] = useState(false);
     const [current, setCurrent] = useState(0)
@@ -30,6 +32,8 @@ export const Cart = () => {
     const [isChecked1, setIsChecked1] = useState(false);
     const [isChecked2, setIsChecked2] = useState(false);
     const publicKey = process.env.REACT_APP_gateWayKey;
+    const{user} = AuthConsumer();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const updateDelete = ()=>{
@@ -114,18 +118,27 @@ export const Cart = () => {
     //constant to determin all fees to be paid including delivery fees
     const totalFee = parseFloat(reduce + shipFee);
 
-
     //on carrt checkout function whenn ready to cashout after cart
     const onSubmitCart = ()=>{
-        // console.log(current)
-        setCurrent(1)
+        if(!user){
+            setTimeout(()=>{
+                message.error('sign in to place order')
+            }, 2000);
+            navigate('/medical/signin');
+            return
+        }
+        setCartValue(true)
+        setCurrent(1);
+        
     }
 
     //on ship checkout function when ship form is submitted
     const onSubmitShip = (e)=>{
         e.preventDefault();
         if(method == ''){
-            alert('pick a shipping method')
+            setTimeout(()=>{
+                message.error('pick a shipping method')
+            }, 2000)
             return
         }
         setShowBtn(true);
@@ -199,17 +212,20 @@ export const Cart = () => {
                   isChecked1={isChecked1} setIsChecked1={setIsChecked1} isChecked={isChecked} setIsChecked={setIsChecked}
         />,
 
-        <Order/>
+        <Order summary={createSummary}/>
     ]
 
-    // const isStepDisable = (stepNumber)=>{
-    //     if(stepNumber === 0){
-    //         return false
-    //     }
-    //     if(stepNumber === 1){
-    //         return shipValue === null
-    //     }
-    // }
+    const isStepDisable = (stepNumber)=>{
+        if(stepNumber === 0){
+            return false
+        }
+        if(stepNumber === 1){
+            return cartValue === null
+        }
+        if(stepNumber === 2){
+            return cartValue === null || shipValue === null
+        }
+    }
 return(
     <section>
     <div className='container-fluid'>
@@ -218,9 +234,9 @@ return(
         <>
         
          <Steps onChange={setCurrent} current={current}>
-            <Steps.Step  title='cart' icon={<ion-icon name="cart-outline"></ion-icon>} />
-            <Steps.Step  title='shipping' icon={<ion-icon name="bicycle-outline"></ion-icon>} />
-            <Steps.Step  title='orders'  icon={<ion-icon name="bag-check-outline"></ion-icon>} />
+            <Steps.Step  title='cart' disabled={isStepDisable(0)} icon={<ion-icon name="cart-outline"></ion-icon>} />
+            <Steps.Step  title='shipping' disabled={isStepDisable(1)} icon={<ion-icon name="bicycle-outline"></ion-icon>} />
+            <Steps.Step  title='orders' disabled={isStepDisable(2)} icon={<ion-icon name="bag-check-outline"></ion-icon>} />
         </Steps>
         
             {displayForms[current]}
@@ -397,7 +413,7 @@ const ProductCart = ({cart, amounts, removeItem,
 
 
 
-const Order = ({})=>{
+const Order = ()=>{
     return(
         <>
             congratulations order has been received!

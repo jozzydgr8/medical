@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
-import { colRef, storage } from "../App";
+import { colRef, storage } from "../../App";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import {v4} from 'uuid'
 import { addDoc } from "firebase/firestore";
 import axios from "axios";
-import { Load } from "./Load";
+import { Load } from "../Load";
 import { Link } from "react-router-dom";
-import { Header } from "./Header";
-import { Navbar } from "../Layout/Navbar";
+import { Header } from "../Header";
+import { Navbar } from "../../Layout/Navbar";
 
 
 

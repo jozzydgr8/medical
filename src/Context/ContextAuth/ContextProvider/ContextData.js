@@ -3,7 +3,8 @@ import { createContext, useReducer } from "react";
 export const contextProvider = createContext();
 const initialState={
     data:null,
-    loading:false
+    loading:false,
+    order:null,
 }
 const reducer = (state, action)=>{
     switch(action.type){
@@ -15,6 +16,10 @@ const reducer = (state, action)=>{
                 return{
                     ...state, loading:action.payload
                 };
+        case 'getOrder':
+            return{
+                ...state, order:action.payload, loading:false
+            };
 
         default: return state
 
