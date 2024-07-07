@@ -35,7 +35,7 @@ export const Navbar = ()=>{
   
 
     return(
-    <nav>
+    <nav id="navBottom">
     <NavLink to="/medical" onClick={()=> setActiveNav('#') } className={activeNav === '#' ? 'active' : ''}> <ion-icon className='nav-icons'  name="home-outline"></ion-icon></NavLink>
 
     <NavLink to="/medical/cart" onClick={()=> setActiveNav('#cart') } className={activeNav === '#cart' ? 'active' : ''}><ion-icon className='nav-icons' name="cart-outline"></ion-icon>{ count > 0 &&<div className='badge'>{count}</div>}</NavLink>

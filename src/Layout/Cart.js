@@ -147,6 +147,7 @@ export const Cart = () => {
 //summary of cart function to be stored in the order or  cart database
     const createSummary = ()=>{
         return{
+            userID:user.uid,
             email,
             firstName,
             lastName,

@@ -75,7 +75,6 @@ function App() {
           const dataRef = snapshot.docs.forEach(doc=>{
             data.push({...doc.data(), id:doc.id});
             dispatch({type:'getOrder', payload:data}) 
-            // setLocalStorageItem('order', JSON.stringify(data));
           });
         });
         dispatch({type:'loading', payload:false});
