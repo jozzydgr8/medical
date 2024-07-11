@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { colRef, storage } from "../../App";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import {v4} from 'uuid'
+import { v4 } from "uuid";
 import { addDoc } from "firebase/firestore";
 import axios from "axios";
 import { Load } from "../Load";

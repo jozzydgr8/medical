@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { Load } from "./Load";
 import { Header } from "./Header";
 import { Navbar } from "../Layout/Navbar";
-import { message } from "antd";
+import { message, Input } from "antd";
 
 export const Signin = ()=>{
     const [email, setEmail] = useState('');
@@ -44,7 +44,7 @@ export const Signin = ()=>{
             <div className="container-fluid">
             <form>
             <input type="email" placeholder="email" value={email} onChange={e=>setEmail(e.target.value)} />
-                <input placeholder="create password" value={password} onChange={e=>setPassword(e.target.value)} />
+                <Input.Password placeholder="create password" value={password} onChange={e=>setPassword(e.target.value)} />
                 <button onClick={handleSignIn} className="full-btn" disabled={disable}>submit</button>
                 {errorMessage && <p>{errorMessage}</p>}
                 <p><Link className="" to={'/medical/signup'}> or signup?</Link></p>

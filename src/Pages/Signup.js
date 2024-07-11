@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { Load } from "./Load";
 import { Navbar } from "../Layout/Navbar";
 import { Header } from "./Header";
-import { message } from "antd";
+import { message, Input } from "antd";
 
 
 export const Signup = ()=>{
@@ -69,7 +69,7 @@ export const Signup = ()=>{
                 <form>
                     <input placeholder="name" value={businessName} onChange={e=>setBusinessName(e.target.value)}/>
                     <input type="email" placeholder="email" value={email} onChange={e=>setEmail(e.target.value)} />
-                    <input placeholder="create password" value={password} onChange={e=>setPassword(e.target.value)} />
+                    <Input.Password placeholder="create password" value={password} onChange={e=>setPassword(e.target.value)} />
                     <button onClick={handleSignUp} className="full-btn" disabled={disable}>submit</button>
                     {errorMessage && <p>{errorMessage}</p>}
                     <p> if you already have an account  <Link to={'/medical/signin'}>sign in</Link> </p>

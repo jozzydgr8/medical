@@ -18,7 +18,7 @@ import {UploadProduct} from "./Pages/Admin/UploadProduct"
 import { ProductTemp } from "./Layout/ProducTemp";
 import { Cart } from "./Layout/Cart";
 import { Load } from "./Pages/Load";
-import { Order } from "./Pages/Order";
+import { Order } from "./Pages/Order/Order";
 
 
 // init firebase
@@ -70,13 +70,14 @@ function App() {
     },[]);
     useEffect(()=>{
       dispatch({type:'loading', payload:true});
-      const unSubscribe = onSnapshot(cartRef, (snapshot)=>{
-          const data = []
-          const dataRef = snapshot.docs.forEach(doc=>{
-            data.push({...doc.data(), id:doc.id});
-            dispatch({type:'getOrder', payload:data}) 
-          });
-        });
+      const unSubscribe = onSnapshot(cartRef, (querySnapshot) => {
+        const dataList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        dispatch({type:'getOrder', payload:dataList})
+        
+      }, (error) => {
+        console.error('Error fetching data: ', error);
+      });
+
         dispatch({type:'loading', payload:false});
         return ()=>unSubscribe();
   },[]);

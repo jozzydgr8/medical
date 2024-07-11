@@ -319,7 +319,7 @@ nav .outline-btn, nav .full-btn {
 }
 
 /* Cart and Subtotal */
-.cartDiv, .subtotal {
+.cartDiv, .subtotal, .orderDiv {
   background: var(--light-gray);
   margin: 20px 0px;
   padding: 2%;
@@ -327,7 +327,7 @@ nav .outline-btn, nav .full-btn {
   flex-direction: column;
 }
 
-.cartSubDiv {
+.cartSubDiv .orderSubDiv {
   width: 50%;
 }
 
@@ -335,7 +335,7 @@ nav .outline-btn, nav .full-btn {
   color: var(--tertiary);
 }
 
-.cartDiv img {
+.cartDiv img, .orderDiv img {
   width: 80%;
 }
 
@@ -428,5 +428,18 @@ nav .container-fluid{
 .footerFlex {
   display: flex;
   align-items: center;
+  gap: 10px;
+}
+
+
+
+/* order order order order */
+.orderProduct{
+  margin-bottom: 15px;
+}
+.orderSubDiv{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   gap: 10px;
 }

@@ -1,13 +1,14 @@
 import { onSnapshot } from "firebase/firestore"
 import { useEffect, useState } from "react"
-import { cartRef, setLocalStorageItem } from "../App"
+import { cartRef, setLocalStorageItem } from "../../App"
 import { Link } from "react-router-dom";
-import { AuthConsumer } from "../Context/ContextAuth/AuthConsumer";
-import { AdminOrder } from "./Admin/AdminOrder";
+import { AuthConsumer } from "../../Context/ContextAuth/AuthConsumer";
+import { AdminOrder } from "../Admin/AdminOrder";
 import { OrderSummary } from "./OrderSummary";
+import { UseContextData } from "../../Context/ContextAuth/ContextProvider/UseContextData";
 
 export const Order =()=>{
-    const [order, setOrder] = useState([]);
+    const {order} = UseContextData();
     const {user} = AuthConsumer();
 
     //if no user
@@ -22,8 +23,9 @@ export const Order =()=>{
         </section>
         )
     }
+    console.log(order)
     //if no order
-    if (order.length === 0) {
+    if (order && order.length === 0 || !order) {
         return(
          <section>
             
@@ -36,18 +38,18 @@ export const Order =()=>{
         )
     }
 
-    console.log(order)
     return(
         <section>
             <div className="summary container-fluid">
             <Link className="headerIcon" to='/medical'><ion-icon name="return-down-back-outline"></ion-icon></Link >
                 {
-                    order.map(order=>(
+                   order && order.map(order=>(
                         <div key={order.id}>
                             {
                                 user && user.uid === process.env.REACT_APP_acceptedID ? <AdminOrder order={order}/>:
                                 <OrderSummary order={order}/>
                             }
+
                         </div>
 
                     ))
