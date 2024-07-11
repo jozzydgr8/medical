@@ -45,7 +45,7 @@ section .container-fluid {
 }
 
 /* Header */
-.headerFlex {
+.headerFlex, .orderFlex {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -425,15 +425,21 @@ nav .container-fluid{
   margin: 2px 0;
 }
 
-.footerFlex {
+.footerFlex{
   display: flex;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
 }
 
 
 
 /* order order order order */
+.orderProducts{
+  border: solid 1px var(--medium-gray);
+  padding:  0 5px;
+  border-radius: 20px;
+}
 .orderProduct{
   margin-bottom: 15px;
 }

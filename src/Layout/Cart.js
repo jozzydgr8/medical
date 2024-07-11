@@ -156,11 +156,13 @@ export const Cart = () => {
             date: new Date().toISOString(),
             phoneNumber,
             total:totalFee,
+            status:false,
             items: cart.map(item=>({
                 productID: item.id,
                 prodductName:item.product,
                 quantity:amounts[item.id],
-                price:item.prize
+                price:item.prize,
+                image:item.productImage
             }))
         }
     }

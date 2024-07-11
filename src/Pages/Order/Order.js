@@ -6,11 +6,18 @@ import { AuthConsumer } from "../../Context/ContextAuth/AuthConsumer";
 import { AdminOrder } from "../Admin/AdminOrder";
 import { OrderSummary } from "./OrderSummary";
 import { UseContextData } from "../../Context/ContextAuth/ContextProvider/UseContextData";
+import { Navbar } from "../../Layout/Navbar";
 
 export const Order =()=>{
     const {order} = UseContextData();
     const {user} = AuthConsumer();
+    const [orders, setOrders]= useState([])
+    
+    useEffect(()=>{
 
+        const data = order && order.filter(item => item.status === false);
+        setOrders(order ? data:[]);
+    },[])
     //if no user
     if (!user){
         return (
@@ -23,9 +30,8 @@ export const Order =()=>{
         </section>
         )
     }
-    console.log(order)
     //if no order
-    if (order && order.length === 0 || !order) {
+    if (orders.length === 0 || !orders) {
         return(
          <section>
             
@@ -41,13 +47,14 @@ export const Order =()=>{
     return(
         <section>
             <div className="summary container-fluid">
+            <Navbar />
             <Link className="headerIcon" to='/medical'><ion-icon name="return-down-back-outline"></ion-icon></Link >
                 {
-                   order && order.map(order=>(
-                        <div key={order.id}>
+                   orders && orders.map(order=>(
+                        <div key={orders.id}>
                             {
-                                user && user.uid === process.env.REACT_APP_acceptedID ? <AdminOrder order={order}/>:
-                                <OrderSummary order={order}/>
+                                user && user.uid === process.env.REACT_APP_acceptedID ? <AdminOrder order={orders}/>:
+                                <OrderSummary order={orders}/>
                             }
 
                         </div>
