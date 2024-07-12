@@ -11,13 +11,8 @@ import { Navbar } from "../../Layout/Navbar";
 export const Order =()=>{
     const {order} = UseContextData();
     const {user} = AuthConsumer();
-    const [orders, setOrders]= useState([])
     
-    useEffect(()=>{
 
-        const data = order && order.filter(item => item.status === false);
-        setOrders(order ? data:[]);
-    },[])
     //if no user
     if (!user){
         return (
@@ -31,7 +26,7 @@ export const Order =()=>{
         )
     }
     //if no order
-    if (orders.length === 0 || !orders) {
+    if (order && order.length === 0 || !order) {
         return(
          <section>
             
@@ -50,11 +45,11 @@ export const Order =()=>{
             <Navbar />
             <Link className="headerIcon" to='/medical'><ion-icon name="return-down-back-outline"></ion-icon></Link >
                 {
-                   orders && orders.map(order=>(
-                        <div key={orders.id}>
+                    order && order.filter(item => item.status === false).map(order=>(
+                        <div key={order.id}>
                             {
-                                user && user.uid === process.env.REACT_APP_acceptedID ? <AdminOrder order={orders}/>:
-                                <OrderSummary order={orders}/>
+                                user && user.uid === process.env.REACT_APP_acceptedID ? <AdminOrder order={order}/>:
+                                <OrderSummary order={order}/>
                             }
 
                         </div>

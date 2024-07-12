@@ -335,7 +335,7 @@ nav .outline-btn, nav .full-btn {
   color: var(--tertiary);
 }
 
-.cartDiv img, .orderDiv img {
+.cartDiv img{
   width: 80%;
 }
 
@@ -442,6 +442,11 @@ nav .container-fluid{
 }
 .orderProduct{
   margin-bottom: 15px;
+}
+.orderDiv img {
+  width: 10%;
+  background: var(--secondary);
+  border-radius: 5px;
 }
 .orderSubDiv{
   display: flex;

@@ -178,13 +178,13 @@ export const Cart = () => {
         publicKey,
         text:`checkout ${totalFee}`,
         onSuccess:()=>{ 
-            setTimeout(()=>{
-            message.success('order has been received')}, 2000)
             const summary = createSummary()
             try{
-                addDoc(cartRef,summary)
+                addDoc(cartRef,summary);
+                setTimeout(()=>{
+                    message.success('order has been received')}, 2000)
             }catch(error){
-                console.error(error)
+                console.error(error, user.uid)
             }
             setShipValue(true)
             setCurrent(2)

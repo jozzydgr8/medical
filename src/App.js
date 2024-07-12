@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { useEffect, useState } from "react";
-import {getFirestore, collection, onSnapshot} from "firebase/firestore"
-import {getAuth} from 'firebase/auth'
+import {getFirestore, collection, onSnapshot, query, where} from "firebase/firestore"
+import {getAuth, onAuthStateChanged} from 'firebase/auth'
 import {getStorage} from 'firebase/storage'
 import { Navigate, Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import {AuthConsumer} from './Context/ContextAuth/AuthConsumer';
@@ -52,8 +52,10 @@ export const setLocalStorageItem = ((key, value)=>{
 
 
 function App() {
-  const {user, loading} = AuthConsumer();
+  const {user, loading, dispatch:dis} = AuthConsumer();
   const {dispatch, loading:load} = UseContextData();
+  
+  //data
   useEffect(()=>{
     dispatch({type:'loading', payload:true});
      
@@ -64,28 +66,63 @@ function App() {
           dispatch({type:'getData', payload:data});
         });
       });
-      dispatch({type:'loading', payload:false})
+    
+      
       return ()=> unSubscribe();
       
     },[]);
-    useEffect(()=>{
-      dispatch({type:'loading', payload:true});
-      const unSubscribe = onSnapshot(cartRef, (querySnapshot) => {
-        const dataList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        dispatch({type:'getOrder', payload:dataList})
-        
-      }, (error) => {
-        console.error('Error fetching data: ', error);
-      });
 
-        dispatch({type:'loading', payload:false});
-        return ()=>unSubscribe();
+//auth check
+  useEffect(()=>{
+    dis({type:'loading', payload:true})
+    const order = async ()=>{
+      try{
+        const unsubscribe = onAuthStateChanged(auth, user=>{
+          if(user){
+            const user = auth.currentUser;
+            dis({type:'signUser', payload:user});
+            console.log('signed in')
+          }else{
+            dis({type:'signUser', payload:null});
+            console.log('logged out')
+          }
+
+          const userID = user && user.uid
+          console.log(userID, 'userid')
+          const q = userID == process.env.REACT_APP_acceptedID ? query(cartRef, where('userID', '==', userID)) : cartRef;
+          const unSubscribeOrder = onSnapshot(q, (querySnapshot) => {
+            const dataList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            dispatch({type:'getOrder', payload:dataList})
+            
+          }, (error) => {
+            console.error('Error fetching data: ', error);
+          });
+        })
+      }catch(error){
+        console.error(error)
+      }
+    }
+
+    order();
+
+  
+        
+    
+    return ()=>{
+      order();
+    }
   },[]);
 
-  if(loading || load){
+  //get order
+  useEffect(()=>{
+    dispatch({type:'loading', payload:true});
+    
+
+},[]);
+  if(loading ){
     return <Load />
   }
-
+console.log(user && user.uid)
   //router
   const router = createBrowserRouter(
     createRoutesFromElements(
