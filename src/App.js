@@ -88,8 +88,7 @@ function App() {
           }
 
           const userID = user && user.uid
-          console.log(userID, 'userid')
-          const q = userID == process.env.REACT_APP_acceptedID ? query(cartRef, where('userID', '==', userID)) : cartRef;
+          const q = userID != process.env.REACT_APP_acceptedID ? query(cartRef, where('userID', '==', userID)) : cartRef;
           const unSubscribeOrder = onSnapshot(q, (querySnapshot) => {
             const dataList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             dispatch({type:'getOrder', payload:dataList})
@@ -122,7 +121,6 @@ function App() {
   if(loading ){
     return <Load />
   }
-console.log(user && user.uid)
   //router
   const router = createBrowserRouter(
     createRoutesFromElements(
