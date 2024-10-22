@@ -13,6 +13,7 @@ import { message, Input } from "antd";
 export const Signup = ()=>{
     const {dispatch} = AuthConsumer();
     const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const [disable, setDisable] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
     const [password, setPassword] = useState('');
@@ -33,6 +34,8 @@ export const Signup = ()=>{
                     .then(()=>{
                         addDoc(userRef, {
                             businessName:businessName,
+                            email:user.email,
+                            phone:phone,
                             userId:user.uid
                         }).then(()=>{
                             setEmail('');
@@ -67,8 +70,9 @@ export const Signup = ()=>{
             disable ? <Load/>:
             <div className="container-fluid">
                 <form>
-                    <input placeholder="name" value={businessName} onChange={e=>setBusinessName(e.target.value)}/>
-                    <input type="email" placeholder="email" value={email} onChange={e=>setEmail(e.target.value)} />
+                    <input placeholder="name" value={businessName} onChange={e=>setBusinessName(e.target.value)} required/>
+                    <input type="email" placeholder="email" value={email} onChange={e=>setEmail(e.target.value)}required />
+                    <input type ='number' placeholder="numberphone" value={phone} onChange={e=>setPhone(e.target.value)} required />
                     <Input.Password placeholder="create password" value={password} onChange={e=>setPassword(e.target.value)} />
                     <button onClick={handleSignUp} className="full-btn" disabled={disable}>submit</button>
                     {errorMessage && <p>{errorMessage}</p>}

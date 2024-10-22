@@ -23,7 +23,7 @@ import { Order } from "./Pages/Order/Order";
 
 // init firebase
 const firebaseConfig = {
-  apiKey:process.env.REACT_APP_apiKey,
+  apiKey:process.env.REACT_APP_apikey,
   authDomain: "fir-project-556ec.firebaseapp.com",
   projectId: "fir-project-556ec",
   storageBucket: "fir-project-556ec.appspot.com",
@@ -40,7 +40,7 @@ export const db = getFirestore();
 export const colRef = collection(db, 'vendor');
 export const userRef = collection(db, 'user')
 export const storage = getStorage(app);
-export const cartRef = collection(db, 'cart')
+export const cartRef = collection(db, 'cart');
 
 const storageEvent = new Event('storageUpdate'); 
 export const setLocalStorageItem = ((key, value)=>{
